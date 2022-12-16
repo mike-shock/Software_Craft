@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>H10. HTTP</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr>
+    <div class="text"> <span class="header">HTTP.</span> <br>
+      <br>
+      <span class="subheader">HyperText Transfer Protocol.</span> <br>
+      <br>
+      HTTP (<code>HyperText Transfer Protocol</code>) — протокол прикладного
+      уровня передачи данных. Он изначально предназначался для передачи
+      гипертекстовых документов в формате HTML, но в сегодня применяется для
+      передачи произвольных данных. </div>
+    <img src="images/http.png" width="640">
+    <div class="text">
+      <p> В HTTP/1.x запросы (<code>request</code>) и ответы (<code>response</code>)
+        передаются в текстовом виде, поэтому их довольно просто обрабатывать
+        программно на любом языке программирования. </p>
+      <p>Данные, передаваемые в теле запроса или ответа могут быть двоичные
+        (например, изображения, аудио- и видео-файлы). </p>
+      <p><b>Сообщение</b> (<code>message</code>).</p>
+      <p>HTTP-сообщение состоит из 3-х частей:</p>
+      <table width="85%" cellspacing="0" cellpadding="4" border="1">
+        <tbody>
+          <tr valign="top">
+            <th width="13%">Часть</th>
+            <th width="20%">Описание</th>
+            <th width="29%">Пример запроса</th>
+            <th>Пример ответа</th>
+          </tr>
+          <tr valign="top">
+            <td> Начальная строка (<code>Starting line</code>) </td>
+            <td> 1 строка: определяет тип сообщения, какое действие выполняется
+              или результат его выполнения </td>
+            <td> <span class="code">GET /books HTTP/1.0</span> </td>
+            <td> <span class="code">HTTP/1.0 200 OK</span> </td>
+          </tr>
+          <tr valign="top">
+            <td> Заголовки (<code>Headers</code>) </td>
+            <td> несколько строк: характеризуют тело сообщения, параметры
+              передачи, прочие сведения </td>
+            <td align="left"> <span class="code">Host: localhost</span><br>
+              <span class="code">Cookie: session_id=
+                2690f82d-337a-4e36-adaa-1d026091c279</span><br>
+              <span class="code">Content-Type: application/json; charset=utf-8</span><br>
+              <span class="code">Accept-Language: ru</span> </td>
+            <td align="left"> <span class="code">Content-Type:
+                application/json; charset=utf-8</span><br>
+              <span class="code">Content-Length: 1376</span><br>
+              <span class="code">Connection: close</span> </td>
+          </tr>
+          <tr valign="top">
+            <td> Разделитель </td>
+            <td> пустая строка </td>
+            <td> <span class="code">\r\n</span> </td>
+            <td> <span class="code">\r\n</span> </td>
+          </tr>
+          <tr valign="top">
+            <td> Тело сообщения (<code>Message body</code>) </td>
+            <td> непосредственно данные сообщения: тело может быть пустым, длина
+              данных указывается в заголовке <code>Content-Length</code> </td>
+            <td> <span class="code">{"filter": {"author": "Пирогов"}}</span> </td>
+            <td> <span class="code">{"result": "FOUND", "data": [<br>
+                {"id": 123, "authors": ["Пирогов В. Ю."], "title": "Ассемблер.
+                Учебный курс", ...},<br>
+                {"id": 234, "authors": ["Пирогов В. Ю."], "title": "Ассемблер
+                для Windows", ...}, <br>
+                {"id": 345, "authors": ["Пирогов В. Ю."], "title": "Ассемблер и
+                дизассемблирование", ...},<br>
+                ]} </span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; text-decoration: none"
+        align="justify"> <font color="#000000"><font face="FreeSans"><font style="font-size: 12pt"
+              size="3"><b>Запрос</b> (<code>request</code>).</font></font></font></p>
+      <p style="margin-bottom: 0cm; font-style: normal; font-weight: normal; text-decoration: none"
+        align="justify"> <font color="#000000"><font face="FreeSans"><font style="font-size: 12pt"
+              size="3"> В 1-й строке запроса (<code>starting line</code>)
+              указывается действие (<code>method</code>), которое нужно
+              проделать с ресурсом:</font></font></font></p>
+    </div>
+    <div class="text">
+      <table width="75%" cellspacing="0" cellpadding="4" border="1">
+        <colgroup><col width="59"> <col width="226"> <col width="353"> </colgroup>
+        <tbody>
+          <tr valign="top">
+            <th width="15">Метод</th>
+            <th width="30">Назначение</th>
+            <th>Результат</th>
+          </tr>
+          <tr valign="top">
+            <td> <strong>GET</strong> </td>
+            <td> запросить содержимое указанного ресурса или начать какой-то
+              процесс на сервере </td>
+            <td> ответ <code>200 OK</code> подтверждает успешное выполнение
+              запроса </td>
+          </tr>
+          <tr valign="top">
+            <td> <strong>HEAD</strong> </td>
+            <td> запросить метаданные для проверки наличия и актуальности
+              ресурса </td>
+            <td> аналогичен <code>GET</code>, но возвращает только строку
+              статуса и заголовки </td>
+          </tr>
+          <tr valign="top">
+            <td> <strong>POST</strong> </td>
+            <td> передать указанному ресурсу пользовательские данные в теле
+              запроса: например, для создания ресурса </td>
+            <td> ответ <code>200 OK</code> должен быть дополнен сообщением о
+              результате выполнения запроса в теле ответа: если был создан
+              ресурс, то следует вернуть ответ <code>201 Created</code> с
+              указанием URI нового ресурса в заголовке <code>Location</code> </td>
+          </tr>
+          <tr valign="top">
+            <td> <strong>PUT</strong> </td>
+            <td> загрузить на указанный ресурс содержимое запроса: создать или
+              заменить ресурс </td>
+            <td> если по заданному URI не существует ресурса, то сервер создаёт
+              его и возвращает статус <code>201 Created</code>; если же ресурс
+              был изменён, то сервер возвращает <code>200 OK</code> или &gt;<code>204
+                No Content</code> в случае ошибки </td>
+          </tr>
+          <tr valign="top">
+            <td> <strong>PATCH</strong> </td>
+            <td> изменить указанный ресурс на основании содержимого запроса </td>
+            <td> аналогичен <code>PUT</code>, но применяется только к фрагменту
+              (части) ресурса </td>
+          </tr>
+          <tr valign="top">
+            <td> <strong>DELETE</strong> </td>
+            <td> удалить указанный ресурс </td>
+            <td> ответ <code>200 OK</code> означает успешное удаление ресурса </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text">
+      <p>В описании протокола HTTP (RFC 1945, RFC 2616, RFC 7231) также описаны
+        другие методы.</p>
+    </div>
+    <div class="text">
+      <p><b>Ответ</b> (<code>response</code>).</p>
+      <p> В 1-й строке ответа сервер отправляет код состояния: целое число из
+        трёх цифр, за которым обычно следует отделённая пробелом фраза на
+        английском языке, поясняющая человеку причину такого ответа.</p>
+      <table width="75%" cellspacing="0" cellpadding="2" border="1">
+        <tbody>
+          <tr valign="top">
+            <th width="8%">Код</th>
+            <th width="10%">Класс</th>
+            <th width="50%">Назначение</th>
+            <th>Пример</th>
+          </tr>
+          <tr valign="top">
+            <td><strong>1xx</strong></td>
+            <td>Информационный (<b>I</b><b>nformational</b>)</td>
+            <td>Сообщает клиенту о процессе передачи. Клиент должен быть готов
+              принять этот класс сообщений как обычный ответ, но ничего не
+              должен отправлять серверу. </td>
+            <td>
+                <p class="code">100 Continue</p>
+                <p class="code">102 Processing</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><strong>2xx</strong></td>
+            <td>Успешное выполнение (<b>Success</b>)</td>
+            <td>Сообщает об успешном принятии и обработке запроса клиента.
+              Сервер может ещё передать заголовки и тело сообщения.</td>
+            <td valign="top">
+                <p class="code">200 OK</p>
+                <p class="code">201 Webpage Created</p>
+                <p class="code">204 No Content</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td> <strong>3xx</strong> </td>
+            <td> Перенаправление (<b>Redirection</b>) </td>
+            <td> Сообщает, что для успешного выполнения операции необходимо
+              сделать другой запрос. Адрес, по которому клиенту следует
+              произвести запрос, сервер указывает в заголовке <code>Location</code>.
+            </td>
+            <td>
+                <p class="code">301 Moved Permanently</p>
+                <p class="code">302 Found / Moved temporarily</p>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><strong>4xx</strong></td>
+            <td>Ошибка клиента (<b>Client Error</b>)</td>
+            <td> Сообщает об ошибке со стороны клиента. При использовании всех
+              методов, кроме <code>HEAD</code>, сервер должен вернуть в теле
+              сообщения пояснение для пользователя. </td>
+            <td valign="top">
+                <p class="code">400 Bad Request</p>
+                <p class="code">401 Unauthorized</p>
+                <p class="code">403 Forbidden</p>
+                <p class="code">404 Not Found</p>
+                <p class="code">405 Method Not Allowed</p>
+                <p class="code">410 Resource Unavailable</p>
+             </td>
+          </tr>
+          <tr valign="top">
+            <td><strong>5xx</strong></td>
+            <td>Ошибка сервера (<b>Server Error</b>)</td>
+            <td> Сообщает о неудачном выполнении операции по вине сервера. При
+              использовании всех методов, кроме <code>HEAD</code>, сервер
+              должен включать в тело сообщения объяснение, которое клиент
+              отобразит пользователю. </td>
+            <td>
+                <p class="code">500 Internal Server Error</p>
+                <p class="code">501 Not Implemented</p>
+                <p class="code">507 Insufficient Storage</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">
+      <p><b>Заголовки</b> (<code>headers</code>)</p>
+      <p>Заголовки в запросах и ответах — это одна или несколько строк, каждая
+        из которых содержит имя параметра и его значение, разделённых
+        двоеточием.</p>
+      <div class="text"><b>Примеры:</b>
+        <pre class="code"><span class="code bold"># Примеры заголовков:</span>
+   Host: ru.wikipedia.org
+   Accept: text/plain
+   Accept-Language: ru
+   Content-Length: 42
+   Content-Type: text/html;charset=utf-8
+   Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==
+   Expires: Tue, 19 Oct 2021 05:25:53 GMT
+   Last-Modified: Sat, 16 Jan 2010 21:16:42 GMT
+  </pre>
+      </div>
+      <font face="FreeSans, sans-serif"><font style="font-size: 12pt" size="3">
+          Помимо стандартных заголовков, в приложении могут быть предусмотрены
+          пользовательские заголовки, которые распознаются и обрабатываются
+          клиентом и сервером.
+          <p> <b>Тело сообщения</b> (<code>message body</code>). </p>
+        </font></font>
+      <p><font face="FreeSans, sans-serif"><font style="font-size: 12pt" size="3">
+            Тело HTTP-сообщения, если оно присутствует, используется для
+            передачи данных, связанных с запросом или ответом. В теле сообщения
+            может передаваться любая информация, в том числе двоичные данные.
+            Для организации обмена с клиентом, который выполняет программную
+            обработку этих данных, удобно использовать формат JSON.</font></font></p>
+      <p></p>
+    </div>
+    <div class="text"><br>
+      <hr> <span class="header">Q&amp;A.</span> <br>
+      <span class="bold">Q:</span> ? <br>
+      <span class="bold">A:</span> ! <br>
+      <hr> <span class="header">Задания.</span> <br>
+      A01. <br>
+      ... <br>
+      <hr> <span class="header">Ссылки:</span>
+      <ul>
+        <li><a href="https://ru.wikipedia.org/wiki/HTTP">https://ru.wikipedia.org/wiki/HTTP</a></li>
+      </ul>
+    </div>
+    <hr>
+    <hr> <a href="_00-content.html">Содержание</a>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>J01. JavaScript: classes.</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr>
+    <div class="text"> <span class="header">Классы в JavaScript.</span> </div>
+    <div class="text"><br>
+    </div>
+    <div class="text"><span class="code">JavaScript</span> поддерживает
+      программирование в объектно-ориентированном стиле. <br>
+      <br>
+      <span class="subheader">Классы.</span></div>
+    <div class="text"><span class="subheader"></span> <br>
+    </div>
+    Для описания класса используется ключесое слово <span class="code">class</span>,
+    за которым записывается <i>имя класса</i> (с заглавной буквы), а само
+    описание класса заключается в фигурные скобки. Пример описания класса
+    "Человек":
+    <div class="text">
+      <pre class="code"><span class="code bold"># Описание класса</span>
+class Person {<br>  // конструктор объекта<br>  constructor(gender, birthday, name) {
+    this._gender = gender;
+    this._birthday = birthday;
+    this._name = name || "";
+    this._deathday = null;
+    this._spouse = null;
+    this._children = [];
+  }<br><br>  // статические свойства класса = константы<br>  static get FEMALE() { return 0; }
+  static get MALE() { return 1; }
+}<br><font color="#000000"><span class="code bold"># Создание объекта (экземпляра класса</span>):
+</font>leo = new Person(Person.MALE, "1988-6-24", "Lev Shock"));<br><font color="#000000"><span
+class="code bold"></span></font><font color="#000000">
+</font></pre><font color="#000000">
+        <hr> </font></div>
+    <div class="text"><font color="#000000"><span class="header">Q&amp;A.</span>
+      </font><br>
+      <div class="text"><font color="#000000"> <span class="bold">Q:</span> ? <br>
+          <span class="bold">A:</span> ! <br>
+          <hr> <span class="header">Задания.</span> <br>
+          A01. <br>
+          ... <br>
+          <hr> <span class="header">Ссылки:</span>
+          <ul>
+            <li>
+              <a href="https://learn.javascript.ru/">https://learn.javascript.ru/</a></li>
+<li>
+<a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes">https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes</a>
+</li>
+            <li>
+              <a href="https://www.javascriptinstitute.org/javascript-tutorial/">https://www.javascriptinstitute.org/javascript-tutorial/</a>
+            </li>
+            <li>
+              <a href="https://www.w3schools.com/js/">https://www.w3schools.com/js/</a>
+            </li>
+          </ul>
+          <ul>
+          </ul>
+        </font></div>
+      <font color="#000000">
+        <hr> <a href="_00-content.html">Содержание</a> </font></div>
+  </body>
+</html>

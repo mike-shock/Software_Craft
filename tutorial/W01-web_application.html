@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>W01. Web-application</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr>
+    <div class="text"> <span class="header">Web-приложение</span> <br>
+      <br>
+      Многие программы разрабатываются в виде «web-приложения» (<span class="code">web
+        application</span>) или приложения с «web-интерфейсом» (<span class="code">Web
+        User Interface = WebUI =</span> <span class="code">WUI</span>), то есть
+      приложения, которое состоит из 2-х частей: клиентской и серверной. </div>
+    <div class="text">В такой распределённой программной системе web-браузер
+      выполняет роль <i>клиента</i>, который обменивается данными с <em>сервером</em>.</div>
+    <div class="text"><em>Клиентская часть</em> web-приложения — это то, что
+      обрабатывается браузером: HTML, CSS, JavaScript.</div>
+    <div class="text"> <em>Cерверная часть</em> web-приложения состоит из <em>web-сервера</em>
+      (<span class="code">web-server</span>), который организует обмен с
+      клиентской частью по протоколу HTTP и серверной прикладной программы (<span
+        class="code">application server program</span>), которую вызывает
+      web-сервер для обработки информации от клиента. <br>
+      <br>
+      <span class="subheader">Виды web-приложений.</span><br>
+      <br>
+      Есть 2 основных подхода, которые применяются при разработке
+      web-приложений: (1) «клиент на <span class="code">JavaScript</span>» и
+      (2) «динамический web-сайт». Вот сравнение этих 2-х подходов.
+      <table width="85%" cellspacing="0" cellpadding="0" border="1">
+        <tbody>
+          <tr align="center">
+            <th width="20%">Где</th>
+            <th width="25%">Что</th>
+            <th width="30%">Подход # 1</th>
+            <th width="25%">Подход # 2</th>
+          </tr>
+          <tr>
+            <th>Клиент / Сервер</th>
+            <th align="right">Результат работы</th>
+            <th>HTML-страница, динамически изменяемая клиентом на <span class="code">JavaScript</span></th>
+            <th>Страницы <span class="code">HTML</span>, динамически
+              формируемые на сервере</th>
+          </tr>
+          <tr>
+            <td rowspan="4">&nbsp;На клиентской стороне (в web-браузере)</td>
+            <td>Средства для отображения данных</td>
+            <td>(<span class="code">HTML</span> + <span class="code">CSS</span>)
+              = <span class="code">DOM</span> ← <span class="code">JavaScript</span></td>
+            <td><span class="code">HTML</span> + <span class="code">CSS</span></td>
+          </tr>
+          <tr>
+            <td>Средства для запроса данных с сервера</td>
+            <td><span class="code">JavaScript</span> (<span class="code">AJAX</span>)
+              → запросы <span class="code">HTTP</span></td>
+            <td>Средства <span class="code">HTML</span>: ссылки, формы →
+              запросы <span class="code">HTTP</span></td>
+          </tr>
+          <tr>
+            <td>Формат передачи данных</td>
+            <td><span class="code">JSON</span> (подходит больше всего) в теле
+              запроса </td>
+            <td>строки "<span class="code">имя=значение</span>" в запросе <span
+                class="code">GET</span> или в теле запроса <span class="code">POST</span></td>
+          </tr>
+          <tr>
+            <td>Используемые методы <span class="code">HTTP</span></td>
+            <td>CRUD-операции по <span class="code">REST</span>: <span class="code">POST</span>,
+              <span class="code">GET</span>, <span class="code">PATCH</span>, <span
+                class="code">DELETE</span></td>
+            <td>Поддерживаемые браузерами в <span class="code">&lt;a href&gt; и
+                &lt;form&gt;</span>: <span class="code">GET</span>, <span class="code">POST</span></td>
+          </tr>
+          <tr>
+            <td rowspan="4">&nbsp;На серверной стороне (в сервере приложений)</td>
+            <td>Обработка входных данных</td>
+            <td>Преобразование из <span class="code">JSON</span> в объекты
+              языка: <span class="code">Hash / Dictionary</span> и <span class="code">Array
+                / List</span></td>
+            <td>Разбор текста: <span class="code">имя=значение</span></td>
+          </tr>
+          <tr>
+            <td>Обработка полученных данных</td>
+            <td>программы (формирования данных для ответа)</td>
+            <td class="code">программы + обработчик шаблонов (для генерирования
+              HTML-документа)</td>
+          </tr>
+          <tr>
+            <td>Способ формирования ответа для клиента</td>
+            <td>Данные преобразуются в <span class="code">JSON</span></td>
+            <td>В шаблон (<span class="code">ERB</span>, <span class="code">PHP</span>,
+              <span class="code">JSP</span>, <span class="code">ASP</span>,
+              ...) вставляются вычисленные данные, чтобы получить готовый <span
+                class="code">HTML</span></td>
+          </tr>
+          <tr>
+            <td>Формат ответа</td>
+            <td><span class="code">JSON</span></td>
+            <td><span class="code">HTML</span></td>
+          </tr>
+          <tr>
+            <td rowspan="2">&nbsp;На клиентской стороне (в web-браузере) — после
+              получения ответа с сервера</td>
+            <td>Действия браузера</td>
+            <td>Страница не заменяется (остаётся прежней)</td>
+            <td>Загружается новая страница (сформированная на сервере на основе
+              шаблона), заменяя предыдущую</td>
+          </tr>
+          <tr>
+            <td>Действия программы на JavaScript</td>
+            <td>получает с сервера данные (<span class="code">JSON</span>) и
+              динамически изменяет представление данных на странице (и элементы
+              интерфейса), обращаясь к объектам <span class="code">DOM</span></td>
+          </tr>
+          <tr valign="top">
+            <td><br>
+            </td>
+            <th>Особенности</th>
+            <td> Браузер выступает в качестве настоящего клиентского приложения,
+              в котором выполняется код на JavaScript. <br>
+              В клиентской части организуется обмен данными с сервером,
+              отображение данных в WUI (и, возможно, их форматирование). <br>
+              Клиент может работать с разными серверами, соблюдающими <span class="code">API</span>
+              и формат обмена данными. <br>
+              В серверной части производится обработка данных по запросу
+              клиента: чтение из хранилища, запись в хранилище, преобразование
+              информации в соответствии с бизнес-правилами. </td>
+            <td>Все действия по обработке и форматированию данных выполняются на
+              стороне сервера. <br>
+              Результат обработки оформляется в виде выходной <span class="code">HTML</span>-страницы
+              (WUI), которая отправляется клиенту. Генерирование страниц обычно
+              делается с помощью шаблонов.<br>
+              <br>
+              Браузер нужен только для отображения готовой страницы. </td>
+          </tr>
+          <tr valign="top">
+            <td> <br>
+            </td>
+            <th> Преимущества </th>
+            <td> 1. Клиентскую и серверную часть можно разрабатывать независимо.<br>
+              2. Клиентскую и серверную часть можно тестировать независимо с
+              помощью API.<br>
+              3. Серверная часть может через API взаимодействовать с разными
+              клиентами: браузером, мобильным приложением, внешней программной
+              системой.<br>
+              4. Закладывается основа для удобного развития приложения, т. к.
+              связность между клиентом и сервером минимизирована.<br>
+            </td>
+            <td> Многие фреймворки поддерживают этот подход. <br>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td> <br>
+            </td>
+            <th> Недостатки </th>
+            <td> Для выполнения в браузере программ на JavaScript требуется
+              более производительный компьютер или мобильное устройство. </td>
+            <td> Серверная часть используется для формирования клиентской части:
+              это сильная связность компонентов, мешающая дальнейшему развитию
+              приложения. </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span class="subheader">Подход 1.</span> <br>
+      <img src="images/1.png" width="1200"> <br>
+      <span class="subheader">Подход 2.</span> <br>
+      <img src="images/2.png" width="1200"> <br>
+      Элементы обеих подходов могут сочетаться. Будет подробно рассмотрен 1-й
+      подход.<br>
+      <br>
+      <span class="subheader">Клиентская часть.</span> <br>
+      <br>
+      Обработка данных на стороне клиента выполняется в web-браузере с помощью
+      набора программ на языке <span class="code">JavaScript</span>: они
+      динамически изменяют представление данных в браузере, манипулируя с
+      объектами <span class="code">DOM</span> (Document Object Model).
+      Программный обмен данными с web-сервером выполняется с использованием
+      технологии <span class="code">AJAX</span>. При этом данные удобнее всего
+      представлять в формате <span class="code">JSON</span>. Обращение к
+      ресурсам на сервере практично организовать в соответствии с архитектурным
+      стилем <span class="code">REST</span>.<br>
+    </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Жизненный цикл данных в клиентской части такой:</div>
+    <div class="text">
+      <ul>
+        <li>Web-браузер обращается к web-серверу по определённому URL и получает
+          HTML-страницу.</li>
+        <li>Браузер загружает необходимые файлы, указанные в HTML: стилевые
+          таблицы (<span class="code">.css</span>) и программы на JavaScript (<span
+            class="code">.js</span>).</li>
+        <li>Браузер выполняет программу на <span class="code">JavaScript</span>,
+          которая динамически настраивает <span class="code">WUI</span>,
+          изменяя элементы в <span class="code">DOM</span>.</li>
+        <li>В ответ на действия пользователя выполняется программа, которая
+          отправляет запрос на web-сервер, в котором содержатся данные в формате
+          <span class="code">JSON<span style="color: black;"></span></span> и
+          указание, что с ними нужно сделать: изменить, добавить удалить или
+          прочитать из хранилища на сервере.</li>
+        <li>Программа получает от web-сервера ответ: сообщение о результате
+          выполненных действий + данные в формате <span class="code">JSON<span
+              style="color: black;"></span></span>.</li>
+        <li>Программа отображает результат и полученные данные в <span class="code">WUI</span>
+          путём изменения элементов в <span class="code">DOM</span>.</li>
+      </ul>
+      <ul>
+      </ul>
+    </div>
+    <div class="text"><br>
+      <span class="subheader">Серверная часть.</span> <br>
+    </div>
+    <div class="text"><em><br>
+      </em></div>
+    <div class="text"><em>Cерверная часть</em> web-приложения — это web-сервер,
+      который организует обмен с клиентской частью, и серверное приложение,
+      которое обрабатывает информациию от клиента.</div>
+    <div class="text"><span class="subheader"><br>
+      </span></div>
+    <div class="text"><span class="subheader">Web-сервер.</span> <br>
+      <br>
+      Web-сервер играет в web-приложении роль внешнего программного слоя для
+      организации ввода-вывода данных: принимает полученный от клиента <span class="code">HTTP</span>-запрос,
+      отдаёт его на обработку серверной прикладной программе, а полученные от
+      него данные отправляет клиенту в виде <span class="code">HTTP</span>-ответа.</div>
+    <div class="text">Обычно применяется независимый web-сервер (<span class="code">ngnix</span>,
+      <span class="code">Apache</span> и т. п.), часто используется web-сервер
+      из программного каркаса (например, <span class="code">puma</span> в <span
+        class="code">Rails</span>).</div>
+    <div class="text"> <br>
+      <span class="subheader">Серверная прикладная программа.</span> <br>
+      <br>
+      Серверные компоненты web-приложения — это либо готовый <em>сервер
+        приложений</em> (<span class="code">application server</span>), либо
+      прикладная программная система, которой web-сервер передаёт данные на
+      обработку и от которой он получает данные для отправки клиенту.</div>
+    <div class="text">Серверная прикладная программа обычно написана на
+      компилируемом (<span class="code">Kotlin, Java</span>, <span class="code">C#</span><span
+        class="code"></span>, ...) или на скриптовом языке программирования (<span
+        class="code">Ruby</span>, <span class="code">Python</span>, <span class="code">PHP</span>,
+      <span class="code">Perl</span>, <span class="code">node.js</span>, ...).
+      Часто при реализации серверного приложения применяются программные <em>каркасы</em>
+      (<span class="code">frameworks</span>), например: <span class="code">Spring</span>
+      (<span class="code">Java</span>), <span class="code">ASP.NET</span> (<span
+        class="code">C#</span>), <span class="code">Ruby on Rails</span> (<span
+        class="code">Ruby</span>), <span class="code">Django</span> (<span class="code">Python</span>),
+      <span class="code">Laravel</span> (<span class="code">PHP</span>), <span
+        class="code">Express</span> (<span class="code">node.js</span>).<br>
+      <br>
+      <span class="underlined">Маршрутизация данных (<span class="code">data
+          routing</span>).</span> <br>
+      <br>
+      Программная компонента, выполняющая функцию диспетчера (<span class="code">dispatcher</span>),
+      получает от web-сервера <span class="code">HTTP</span>-запрос, в котором
+      (в соответствии с правилами <span class="code">REST</span>) выделяет
+      следующие данные:<br>
+      <table width="90%" cellspacing="0" cellpadding="0" border="1">
+        <tbody>
+          <tr align="center">
+            <th width="12%">Часть запроса </th>
+            <th width="45%">Вывод</th>
+            <td><b>Пример</b></td>
+          </tr>
+          <tr>
+            <td><span class="code">&nbsp;HTTP</span>-метод</td>
+            <td><span class="bold">&nbsp;Действие</span>, которое нужно
+              выполнить с ресурсом, которому можно сопоставить метод для
+              обработки данных из запроса.</td>
+            <td><span class="code">GET</span></td>
+          </tr>
+          <tr>
+            <td>&nbsp;URI</td>
+            <td><span class="bold">&nbsp;Идентификатор ресурса</span>, которому
+              можно сопоставить программную компоненту (объект определённого
+              класса), которая содержит требуемый метод обработки данных.</td>
+            <td><span class="code">/books</span></td>
+          </tr>
+          <tr>
+            <td>&nbsp;Заголовки</td>
+            <td>
+              <ul>
+                <li><span class="bold">Представление</span> (формат, кодировка)
+                  входных и выходных данных.</li>
+                <li><span class="bold">Идентификатор сеанса</span> (<span class="code">session_id</span>),
+                  по которому можно определить пользователя, который его открыл,
+                  его роль и связанные с ней права доступа к данным.</li>
+              </ul>
+            </td>
+            <td style="text-align: left; background-color: white; vertical-align: top;"><span
+                class="code">Content-Type: application/json; charset=utf-8<br>
+                \r\n<br>
+                {"session_id": "47538da6-8c6a-46cb-a9ca-a1b62bd23d39"}<br>
+              </span></td>
+          </tr>
+          <tr>
+            <td>&nbsp;Тело запроса</td>
+            <td><span class="bold">&nbsp;Данные</span> для обработки.</td>
+            <td style="text-align: left; background-color: white;"><span class="code">{"action":"list",
+                "resource":"books", "class":"Book"</span><span class="code"><span
+                  class="code">, "data":{}</span>, "sort":"title", "role_id": 2}</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      Для обработки данных нужно, чтобы компонента-диспетчер умела направлять
+      данные на соответствующие компоненты. Для этого необходимо, чтобы во
+      входных данных находились достаточные указания (имена ресурсов, классов и
+      пользовательские операции), чтобы выбрать подходящую компоненту.<br>
+      <br>
+      <span class="underlined">Обработка данных (<span class="code">data
+          processing</span>).</span> <br>
+      <br>
+    </div>
+    <div class="text">Обработкой данных занимаются компоненты-<span class="italicized">интеракторы</span>
+      (<span class="code">interactor</span>), реализующие логику приложения:
+      каждый интерактор реализует свой сценарий использования (<span class="code">use
+        case</span>). Они при необходимости обращаются к компонентам других
+      уровней: бизнес-объектам и адаптерам ввода-вывода.</div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Программная компонента получает от «диспетчера» данные для
+      обработки в виде модели в независимом от языка представлении, например, в
+      виде ассоциативного массива (хэша) или массива хэшей.В таком же виде
+      перемещаются данные между компонентами и отправляются клиенту.</div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Для обработки простых операций манипулирования объектами
+      достаточно методов из набора <span class="code">CRUD</span> (<span class="code">Create</span>,
+      <span class="code">Read</span>, <span class="code">Update</span>, <span
+        class="code">Delete</span>). Этих средств достаточно для актуализации
+      данных в «справочниках» (списках объектов, которые не содержат ссылок на
+      другие объекты). </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Для сложных объектов или сценариев требуется выполнить
+      последовательность действий. Например, при добавлении пользователя нужно
+      отработать 2 действия: отправить запрос на регистрацию (<span class="code">register</span>)
+      и подтвердить пользователя (<span class="code">verify</span>), а для
+      предоставления данных о книге (<span class="code">Book</span>) нужно
+      собрать её из объектов разных классов (<span class="code">Author</span>, <span
+        class="code">PublishingHouse</span>, <span class="code">Category</span>,
+      ...). </div>
+    <div class="text"><br>
+      <span class="subheader">Хранилище данных.</span><br>
+      <br>
+      Ввод-вывод данных для долговременного хранения организуется с помощью
+      интерфейсных компонент-<em>адаптеров</em> (<span class="code">adapter</span>),
+      которые унифицируют доступ к хранилищу данных. При этом подходе можно
+      безболезненно перейти на использование другого хранилища, не затрагивая
+      компоненты уровня логики приложения. <br>
+    </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Для хранения данных используются внешние программные
+      компоненты. Часто для хранения данных применяется реляционная СУБД (<span
+        class="code">PostgreSQL</span>, <span class="code">MySQL</span> и т.
+      п.), которая может размещаться на одном физическом узле сети вместе с
+      web-сервером или на отдельном узле. Для небольших объёмов данных можно
+      использовать локальную встраиваемую СУБД (<span class="code">SQLite</span>,
+      <span class="code">BDE</span>, <span class="code">FirebirdSQL</span>, <span
+        class="code">dBASE</span>). <br>
+      В качестве хранилища также может применяться база данных no-SQL или,
+      «плоские» файлы со структурированными данными (<span class="code">JSON</span>,
+      <span class="code">CSV</span>, <span class="code">YAML</span>). </div>
+    <div class="text"><br>
+    </div>
+    <div class="text"><span class="subheader">API.</span><br>
+      <br>
+      При 1-м подходе к разработке web-приложений обмен данными между клиентом и
+      сервером выполняется через API (<span class="code">application programming
+        interface</span>). Поэтому серверная прикладная программа через этот API
+      может взаимодействовать с внешними программами, которые играют роль
+      программных клиентов web-приложения вместо web-браузера. Через этот API
+      удобно производить автоматизированное тестирование web-приложения. </div>
+    <div class="text"><br>
+      <hr> <span class="header">Q&amp;A.</span> <br>
+      <span class="bold">Q:</span> Почему подробно объясняется подход №1? <br>
+      <span class="bold">A:</span> Он больше соответствует понятию
+      web-приложение. Важно, что клиент (программа на <span class="code">JavaScript</span>
+      в браузере) общается с сервером по API: это формализует взаимодействие,
+      распараллеливает разработку, облегчает тестирование. </div>
+    <div class="text">При таком подходе с web-сервером по API может
+      взаимодействовать не только браузер, но и внешние сервисы.</div>
+    <div class="text"><br>
+      <hr> <span class="header">Ссылки:</span>
+      <ul>
+        <li><a href="https://ru.wikipedia.org/wiki/REST">REST</a></li>
+      </ul>
+      <hr> </div>
+    <hr> <a href="_00-content.html">Содержание</a>
+  </body>
+</html>

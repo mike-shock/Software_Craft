@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>P02. Modules</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+ <a href="_00-content.html">Содержание</a>
+ <hr />
+ <div class="text">
+ <span class="header">Модули.</span> <br />
+ <br />
+Все языки программирования дают возможность разрабатывать программы в виде небольших <span class="italicized">модулей</span> (<span class="code">modules</span>), 
+которые в разных языках могут называться по-разному: подпрограмма (<span class="code">subroutine</span>), процедура (<span class="code">procedure</span>), 
+функция (<span class="code">function</span>), метод (<span class="code">method</span>).
+<br />
+Модульность (program decomposition) — это не только способ бороться со сложностью программной системы, но и средство повторного использования кода (<span class="code">reusability</span>), 
+а также повышение читабельности (<span class="code">readability</span>) программы.
+<br />
+Модуль — это набор действий, имеющий имя (<span class="code">module name</span>), необязательный список параметров (<span class="code">parameter list</span>). 
+Если модуль возвращает значение (<span class="code">return value</span>), то это — функция (<span class="code">function</span>).
+Модули при разработке обычно описываются в отдельных исходных файлах, подключаемых в вызывающей программе. 
+Модули часто хранятся в библиотеках модулей, оформленных как пакеты с исходными текстами (<span class="code">gem</span>, <span class="code">egg</span>, ...) 
+или откомпилированными программами (<span class="code">jar</span>, <span class="code">so</span>, <span class="code">dll</span>, ...).
+<br />
+<h3 class="subheader">Описание модулей</h3>
+  <pre class="code">
+<span class="code bold"># Ruby:</span>
+# определяет тип содержимого по суффиксу/расширению файла
+def content_type(file_name)
+  content = 'text/html'
+  suffix = File.extname(file_name)
+  case suffix
+  when '.html'
+    content = 'text/html'
+  when '.css'
+    content = 'text/css'
+  end
+  return content
+end
+
+<span class="code bold"># Python:</span>
+# суммирует значения элементов массива
+def sum_of_elements(array):
+    sum = 0
+    for i in range(len(array)):
+        sum += array[i]
+    return sum
+
+<span class="code bold">// JavaScript:</span>
+// вставляет текст в элемент с указанным идентификатором
+function place_text_in(element_id, text) {
+  var container = document.getElementById(element_id);
+  var span = '<span class="text">' + text + '</span>';
+  container.insertAdjacentHTML('beforeEnd', span);
+  return container;
+}
+
+<span class="code bold">// PHP:</span>
+// находит в списке работника по его идентификатору
+function find_employee_in_list_by_id($employees, $id) {
+  $employee = NULL;
+  for ($i = 0; $i < sizeof($employees); $i++) {
+    if ($employees[$i]->id() == $id) {
+      $employee = $employees[$i];
+    }
+  }
+  return $employee;
+}
+  </pre>
+<h3 class="subheader">Параметры модулей</h3>
+При описании подпрограммы после её имени (<span class="code">subroutine name</span>) обычно в круглых скобках записываются её
+параметры (<span class="code">parameter</span>): список имён переменных, которые будут доступны в теле подпрограммы.
+Значения этих переменных задаются при вызове подпрогораммы.
+  <pre class="code">
+<span class="code bold"># Ruby:</span>
+def module1(parameter1, parameter2, parameter3) # входные параметры модуля
+  print(parameter1+" "+parameter2+" "+parameter3)
+end
+argument1 = "Строительные"
+argument2 = "блоки"
+module1(argument1, argument2, "программы") # вызов
+  </pre>
+Хотя в некоторых языках есть возможность описывать именованные параметры и значения по умолчанию. 
+Не зависящий от языка способ передавать набор «именованных» аргументов: передавать хэш значений: 
+  <pre class="code">
+<span class="code bold">// JavaScript:</span>
+send_data({"language":"JavaScript","year":1995});
+  </pre>
+Правильно спроектированный модуль выполняет одно определённое действие, обрабатывает данные из входных параметров и формирует возвращаемое значение, 
+т. е. ведёт себя как функция. Предпочтительно использовать именно функции, которые на производят побочных эффектов (<span class="code">side effects</span>), 
+то есть не изменяют среду выполнения (<span class="code">execution environment</span>): значения переменных вне модуля.
+<br />
+<br /><img src="images/modules.png" width="300" /><br />
+
+<h3 class="subheader">Вызовы модулей</h3>
+Функционирование программной системы — это обращения к подпрограммам (<span class="code">subroutine call</span>) 
+с фактическими значениями параметров, аргументами (<span class="code">arguments</span>). 
+Соответствие между передаваемыми при вызове модуля аргументами и списком параметров обычно позиционное, а количество аргументов и параметров должно совпадать.
+
+  <pre class="code">
+<span class="code bold"># Ruby:</span>
+type_of_content = content_type('index.html')
+
+<span class="code bold"># Python:</span>
+array = [1,2,3,4,5,6,7,8,9]
+s = sum_of_elements(array)
+
+<span class="code bold">// JavaScript:</span>
+&lt;div id='container_for_text'&gt; &lt;/div&gt;
+&lt;script&gt;
+ var text_to_add = get_text_from_server(url);
+ place_text_in_element('container_for_text', text_to_add);
+&lt;/script&gt;
+
+<span class="code bold">// PHP:</span>
+$list_of_employees = load_from_table('employees');
+$employee = find_employee_in_list_by_id($list_of_employees, 12);
+$json_data = data_to_json($employee);
+send_to_browser($json_data);
+  </pre>
+Применение модулей сокращает размер исходников за счёт повторного использования кода (<span class="code">code reuse</span>),
+позволяет вносить изменения в единственном месте.
+<hr />
+<span class="header">Задания.</span> <br />
+<span class="header">Задание M01.</span><br /
+Написать на <span class="code">PHP</span> функцию find_in_list($role, $list), которая в списке ролей пользователей (
+<span class="code">"Администратор", "Заявитель", "Диспетчер", "Руководитель", "Водитель"</span>), 
+оформленном в виде массива хэшей, ищет роль по названию и возвращает в качестве результата её идентификатор. 
+  <pre class="code">
+$roles = [
+  array("id" => 1, "role" => "Администратор"),
+  array("id" => 2, "role" => "Заявитель"),
+    // ...
+];
+role_id = find_in_list("Заявитель", $roles); // --> 2
+  </pre>
+<span class="header">Задание M02.</span><br />
+Написать такую же функцию на <span class="code">JavaScript</span>.
+<hr />
+Q&A.
+Q: В чём разница между применением в подпрограммах команд <span class="code">return</span> и <span class="code">echo</span> (или <span class="code">print</span>)?
+A: <span class="code">echo</span>, как и <span class="code">print</span>, формирует строку, которая «впечатывается» в HTML в том месте, 
+где выполняется скрипт, например, на <span class="code">PHP</span>:
+  <pre class="code">
+    &lt;?php echo(date("Y-m-d")); ?&gt;
+  </pre>
+или на Ruby:
+  <pre class="code">
+    &lt;%= Time.now %&gt;
+  </pre>
+или на JavaScript:
+  <pre class="code">
+    &lt;script&gt;
+	const today = new Date();
+	document.write(today);
+    &lt;/script&gt;
+  </pre>
+А <span class="code">return</span> возвращает значение из подпрограммы, которое можно присвоить в переменную или сразу напечать.
+Например, на JavaScript:
+  <pre class="code">
+// сцепляет элементы массива в строку, разделяя их пробелами
+function insert_blanks(array) { 
+ var line = "";
+ for (var i = 0; i < array.length; i++) {
+  line = line + array [i] + " ";
+ }
+return line;
+
+var list = ["Я", "пишу", "на", "JavaScript"];
+var text = insert_blanks(list);
+
+// write делает то же, что и print или echo
+document.write(text);
+// можно «впечатать» в HTML результат работы функции без присваивания
+document.write(insert_blanks(list));
+  </pre>
+ <br />
+  <hr />
+  <span class="header">Ссылки:</span>
+  <ul>
+    <li><a href="https://ru.wikipedia.org/wiki/Модульное_программирование">Модульное программирование.</a></li>
+  </ul>
+  <hr />
+ </div>
+ <a href="_00-content.html">Содержание</a>
+</body>
+</html>

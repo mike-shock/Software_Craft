@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>D05. Dynamic Data Structures</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+ <a href="_00-content.html">Содержание</a>
+ <hr />
+ <div class="text">
+ <span class="header">Динамические структуры данных.</span> <br />
+ <br />
+Иногда требуется использовать сложные структуры данных: деревья, графы, очереди.
+Обычно такие разветвлённые структуры создаются во время выполнения программы, поэтому они называются динамическими
+(<span class="code">dynamic data structure</span>).
+Динамические структуры данных можно создавать с помощью ссылок (<span class="code">reference</span>).<br />
+<br />
+<span class="subheader">Дерево</span>.<br /><br />
+Примеры деревьев: эволюционное дерево видов, структура подразделений в организации. Или иерархия элементов в документе HTML:
+<br /><br />
+<img src="images/tree.png" width="512" />
+<br /><br />
+Чтобы представить в программе <span class="italicized">дерево</span> (<span class="code">tree</span>), 
+можно применить уже известную структуру данных.
+Например, дерево можно представить в виде <a href="D03-hash.html">хэша</a>:
+  <pre class="code">
+<span class="code bold">// JavaScript:</span>
+var tree = {
+  "html": {
+    "head": {
+      "style": {
+      },
+      "script": {
+      }
+    },
+    "body": {
+      "h1": {
+      },
+      "div": {
+        "h2": {
+        },
+        "img": {
+        },
+        "span": {
+        },
+      }
+    }
+  }
+};
+  </pre>
+<br />
+Связь между классами типа "Наследование" (<span class="code">relationship</span>) — ещё один пример дерева:
+<pre class="code">
+Животные
+-----Млекопитающие
+     -----Приматы
+          -----Люди
+     -----Кошачьи
+          -----Котики
+-----Птицы
+
+</pre>
+<br />
+Другой пример — связь типа "Агрегация" (<span class="code">aggregation</span>),
+когда в одном объекте-контейнере содержатся другие объекты-контейнеры, в которых находятся ещё объекты...
+<pre class="code">
+Компьютер 
+-----Корпус
+     -----Материнская плата
+          -----Процессор
+          -----Память
+     -----Жёсткий диск
+-----Монитор
+-----Клавиатура
+</pre>
+<br />
+Дерево в реляционной <span class="italicized">таблице</span> можно сохранить, если иметь дополнительную колонку, 
+в которой будет храниться ссылка на родительскую запись:
+<span class="italicized">внешний ключ</span> (<span class="code">parent_id</span>) на 
+<span class="italicized">первичный ключ</span> (<span class="code">id</span>) в этой же таблице:<br />
+<br />
+<table border="1" cellpadding="0" cellspacing="0">
+ <tr> <td class="code bold"> id &nbsp;</td> <td class="code bold">data</td> <td class="code bold">parent_id</td> </tr>
+ <tr> <td class="code" align="right">10</td> <td class="code">Корень дерева</td> <td class="code" align="right">NULL</td> </tr>
+ <tr> <td class="code" align="right">11</td> <td class="code">Узел на уровне 1</td> <td class="code" align="right">10</td> </tr>
+ <tr> <td class="code" align="right">12</td> <td class="code">Узел на уровне 2</td> <td class="code" align="right">11</td> </tr>
+ <tr> <td class="code" align="right">13</td> <td class="code">Узел на уровне 1</td> <td class="code" align="right">10</td> </tr>
+ <tr> <td class="code" align="right">21</td> <td class="code">Узел на уровне 3</td> <td class="code" align="right">12</td> </tr>
+</table>
+<br />
+
+<span class="subheader">Граф</span>.<br /><br />
+<span class="italicized">Граф</span> (<span class="code">graph</span>) можно создать в программе, используя ссылки между
+объектами-узлами графа.
+Граф также можно представить в виде массива, например, <span class="italicized">матрицы смежности</span>.
+<br /><br />
+<hr />
+<span class="header">Задание DD#01.</span><br />
+Написать программу обхода дерева и вывода информации из каждого узла дерева.
+ <hr />
+  <span class="header">Ссылки:</span>
+  <ul>
+   <li><a href="https://ru.wikipedia.org/wiki/Диаграмма_классов">Связи на диаграмме классов в UML</a></li>
+   <li><a href="https://ru.wikipedia.org/wiki/Матрица_смежности">Матрица смежности</a></li>
+  </ul>
+ </div>
+ <hr />
+ <a href="_00-content.html">Содержание</a>
+</body>
+</html>

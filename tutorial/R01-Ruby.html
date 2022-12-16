@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>R01. Ruby.</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr>
+    <div class="text"> <span class="header">Ruby.</span> <br>
+      <br>
+    </div>
+    <div class="text">Ruby — интерпретируемый динамический полностью
+      объектно-ориентированный&nbsp; высокоуровневый язык программирования.
+      Разработан под влиянием языков Perl, Smalltalk, Eiffel, Ada и Lisp, а
+      также C++, CLU, Dylan, Lua и Python.<br>
+      <br>
+      Ruby поддерживает несколько парадигм программирования: <i>процедурную</i>
+      (определение подпрограмм и переменных вне классов), <i>объектно-ориентированную</i>
+      (всё является объектами), <i>функциональную</i> (анонимные функции,
+      замыкания, возврат значения всеми инструкциями, возврат методом последнего
+      вычисленного значения, функции высшего порядка), <i>аспектно-ориентированную</i>
+      (AOP). <br>
+      <br>
+      В нём есть средства всесторонней интроспекции (reflection), реализована
+      независимая от ОС многопоточность и эффективный сборщик мусора, имеются
+      мощные средства мета-программирования.</div>
+    <div class="text">
+      <pre><span class="subheader">История создания.</span></pre>
+    </div>
+    <div class="text">Разработал язык Ruby японский программист Юкихиро Мацумото
+      (松本行弘), известный под ник-неймом Matz. Название языка навеяно языком Perl,
+      многие особенности синтаксиса и семантики из которого заимствованы в Ruby.<br>
+      <br>
+      Одним из источников вдохновения для Ю. Мацумото при разработке Ruby был
+      научно-фантастический роман «Вавилон-17»&nbsp; Сэмюэля Дилэни, основанный
+      на гипотезе лингвистической относительности Сепира – Уорфа (язык
+      определяет мышление, и, соответственно, лингвистические категории
+      ограничивают и определяют когнитивные категории). Поэтому синтаксис и
+      средства языка программирования во многом определяют способ
+      профессионального мышления разработчика: его подход к задаче и манеру
+      программирования.<br>
+      <br>
+      Целью разработки было создание настоящего объектно-ориентированного
+      интерпретируемого мощного и удобного языка программирования, лёгкого в
+      изучении, который приятного использовать, на котором можно быстро
+      разрабатывать программы.<br>
+      <br>
+      Matz создал сбалансированный гармоничный язык с ясным предсказуемым
+      синтаксисом, сочетающий преимущества объектно-ориентированного
+      программирования с достоинствами других парадигм.</div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Ruby реализован для всех современных аппаратных платформ и
+      операционных систем. Реализации языка Ruby — свободно распространяемые
+      (под лицензиями Ruby License, GPLv2, 2-clause BSD License).<br>
+    </div>
+    <div class="text"><br>
+      Примеры:
+      <pre class="code">// Ruby:
+  def print_message(string, n) // описание подпрограммы начинается с 'def'
+    puts string + "!"*n        // операция '*' повторяет строку n раз
+  end                          // и заканчивается 'end'
+<br>  message = "Миру - мир"       // ';' в конце строки можно не ставить<br>  print_message message, 3     // вызов подпрограммы print_message(message, 3) можно писать без скобок<br>  // --&gt; Миру - мир!!!
+
+  
+</pre> <span class="header">Установка.<br>
+      </span><br>
+      Скачать свежий дистрибутив системы программирования Ruby можно с
+      официального сайта языка: <a href="https://www.ruby-lang.org/ru/downloads/"
+        title="www.ruby-lang.org/ru/downloads/">ruby-lang.org/ru/downloads/</a>.<br>
+      <br>
+      <span class="subheader">GNU/Linux.<br>
+      </span><br>
+      Обычно в ОС Linux Ruby уже установлен. Но если нет, то его можно
+      установить с помощью cистемы управления пакетами, например:</div>
+    <pre class="code">    sudo apt-get install ruby # дистрибутивы на основе Debian
+    sudo yum install ruby     # дистрибутивы на основе RedHat</pre>
+    <div class="text">Как установить Ruby в других дистрибутивах, описано в <a
+        href="https://www.ruby-lang.org/ru/documentation/installation/">документации</a>,
+      в том числе на русском языке.<br>
+    </div>
+    <div class="text"><br>
+      <span class="subheader">MacOS.</span> <br>
+    </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">На MacOS, скорее всего, Ruby уже установлен. Это можно
+      легко проверить: откройте терминальное окно и введите команду:<br>
+      <code> ruby -v </code><br>
+    </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">В ответ вы должны увидеть версию установленного
+      интерпретатора языка.<br>
+      Если программа-интерпретатор не найдена, то для установки можно
+      использовать сторонние инструменты: rbenv и RVM.<br>
+      <span class="subheader"><br>
+        Microsoft Windows.</span> <br>
+    </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">На официальном сайте языка Ruby для MS Windows
+      предлагается использовать установщик с сайта <a href="https://rubyinstaller.org/downloads/">rubyinstaller.org</a>
+      Надо скачать оттуда установщик и запустить его. <br>
+      По умолчанию Ruby ставится в /Program Files, а я обычно устанавливаю в
+      каталог <span class="code">/opt/ruby/</span>.<br>
+      <span class="header"><br>
+        Ruby gems.</span><br>
+    </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Как и для других языков программирования, для Ruby
+      разработана удобная система установки дополнительных библиотечных модулей,
+      которые называются gems.За управление такими модулями отвечает утилита
+      gem. </div>
+    <div class="text">Например, для запуска тестового web-сервера <span class="code">puma</span>
+      + <span class="code">rack </span>потребуется установить такие
+      "самоцветы":</div>
+    <pre class="code">gem install http_router
+gem install rack<br>gem install puma</pre>
+    <div class="text">Посмотреть список установленных модулей можно командой:</div>
+    <div class="text">
+      <pre class="code">gem list</pre>
+      <div class="text"></div>
+    </div>
+    <div class="text">Обновить модуль можно командой:
+      <pre class="code">gem update rack</pre>
+      Удалияется модуль командой:
+      <div class="text">
+        <pre class="code">gem uninstall puma
+</pre></div>
+      Остальные команды для управления модулями выводятся командой:
+      <div class="text">
+        <pre class="code">gem help commands
+  
+</pre>
+        <div class="text"></div>
+        <div class="text"></div>
+        <div class="text"></div>
+      </div>
+      <hr> <span class="header">???</span>
+      <pre>??? </pre>
+      <hr> <span class="header"></span>
+      <hr> <span class="header">Q&amp;A.</span> <br>
+      <span class="bold">Q:</span> Кто разработал язык Ruby?<br>
+      <span class="bold">A:</span> Matsumoto Yukihiro.<br>
+      <hr> <span class="header">Задания.</span> <br>
+      A01. <br>
+      ... <br>
+      <hr> </div>
+    <hr> <span class="header">Ссылки:</span>
+    <ul>
+      <li><a href="https://www.ruby-lang.org/ru/">Официальный сайт языка.</a></li>
+    </ul>
+    <hr> <a href="_00-content.html">Содержание</a>
+  </body>
+</html>

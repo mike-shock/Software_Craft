@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>H20. REST.</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr>
+    <div class="text"> <span class="header">REST.</span> <br>
+      <br>
+      <span class="subheader">«Преобразование состояний на основе представленй».</span>
+      <br>
+      <br>
+      Термин <span class="code">REST</span> (Representational State Transfer)
+      ввёл <b>Roy T. Fielding</b> в своей докторской диссертации "Architectural
+      Styles and the Design of Network-based Software Architectures" (2000).<br>
+      <br>
+      Рой Т. Филдинг описал «архитектурный стиль» для построения распределённого
+      приложения на основе стандартных технологий WWW:
+      <ul>
+        <li>каждый запрос клиента на изменение состояния данных, отправляемый на
+          сервер, содержит в себе <span class="bold">исчерпывающую информацию</span>
+          для обработки этих данных;</li>
+        <li>запрос также может содержать указания о желаемом представлении
+          данных в ответе сервера;</li>
+        <li>сервер не обязан сохранять информацию о состоянии клиента
+          («клиентской сессии», «сеансе работы клиента»), об этом должен
+          заботиться сам клиент.</li>
+      </ul>
+      <br>
+      <span class="subheader">Основные понятия REST</span>:<br>
+      <br>
+      Информация на сервере называется <i>ресурсами</i> (resource). Ресурсы
+      подразделяются на единичные ресурсы (<i>объекты</i>) и <i>коллекции</i>
+      (списки, наборы, массивы) ресурсов.<br>
+      <ol>
+        <li> Ресурсы уникально идентифицируются на сервере по URI (Uniform
+          Resource Identifier). Чаще всего идентификатором является "адрес
+          ресурса" ("гиперссылка на ресурс") на сервере в виде URL. Прикладная
+          программа на сервере по URL может найти ресурс в хранилище. Хранилищем
+          может служить не только файловая система, но и база данных,
+          структурированные файлы с данными или программные источники
+          информации.<br>
+          <br>
+          Примеры:
+          <pre class="code">  server.net/resources		# коллекция
+  server.net/resources/id	# ресурс
+  </pre>
+        </li>
+        <li> Действия (операции) над ресурсами выполняются при помощи
+          стандартных методов протокола HTTP (method):
+          <pre class="code">  ◦ <span class="code bold">POST</span> ~ создать, добавить (список ресурсов)
+  ◦ <span class="code bold">GET</span> ~ выбрать, получить, прочитать
+  ◦ <span class="code bold">PUT</span> ~ создать, добавить (ресурс)
+  ◦ <span class="code bold">PATCH</span> ~ изменить, обновить
+  ◦ <span class="code bold">DELETE</span> ~ удалить, стереть
+  </pre>
+          Протокол HTTP предоставляет клиенту все необходимые операции для
+          изменения данных на сервере: классический набор действий CRUD (Create,
+          Read, Update, Delete), применяемый в СУБД. <br>
+          <br>
+          Примеры:
+          <pre class="code">  GET /resources		# прочитать коллекцию
+  GET /resources/id		# прочитать ресурс
+  DELETE /resources/id		# удалить ресурс
+  </pre>
+        </li>
+        <li> Ресурсы запрашиваются в виде представлений (representation),
+          соответствующих стандартизованным MIME-типам (IANA Media Types):
+          <pre class="code">  <span class="code bold">application/json</span> — JavaScript Object Notation, JSON (RFC 4627)
+  <span class="code bold">application/javascript</span> — JavaScript / ECMAscript (RFC 4329)
+  <span class="code bold">text/html</span> — HyperText Markup Language, HTML (RFC 2854)
+  <span class="code bold">text/css</span> — Cascading Style Sheets (RFC 2318)
+  <span class="code bold">text/plain</span> — текстовые данные (RFC 2046, 3676)
+  <span class="code bold">text/xml</span> — eXtensible Markup Language, XML (RFC 3023)
+  <span class="code bold">application/pdf</span> — Portable Document Format, PDF (RFC 3778)
+  <span class="code bold">image/png</span> — Portable Network Graphics, PNG (RFC 2083) </pre>
+        </li>
+      </ol>
+      Желаемое представление ресурса в запросе клиента и фактическое
+      представление ресурса в ответе сервера обычно передаётся в заголовках
+      (header), предусмотренных в протоколе HTTP.</div>
+    <div class="text">Для одного и того же ресурса может быть несколько
+      представлений, например: обычный текст, HTML, PDF, диаграмма в виде
+      изображения SVG.<span></span></div>
+    <div class="text"><br>
+    </div>
+    <div class="text"> <span class="subheader">Обработка ресурсов в стиле REST</span>:
+    </div>
+<br>
+    <div class="text">
+      <table width="80%" cellspacing="0" cellpadding="4" border="1" style="font-size:small;">
+        <tbody>
+          <tr valign="top" align="center">
+            <td rowspan="2">
+              <b><span>Action</span></b>
+</td>
+            <td colspan="4" rowspan="1"> <b><span>HTTP-запрос</span></b> </td>
+            <td colspan="2"> <b><span>Положительный ответ</span></b> </td>
+            <td colspan="2"> <b><span>Отрицательный ответ</span></b> </td>
+          </tr>
+          <tr valign="top" align="center">
+            <td> <b><span>method</span></b> </td>
+            <td> <b><span>URI</span></b> </td>
+            <td> <b><span>body</span></b> </td>
+            <td><b><span>headers</span></b></td>
+            <td> <b><span>status</span></b> </td>
+            <td> <b><span>body</span></b> </td>
+            <td> <b><span>status</span></b> </td>
+            <td> <b><span>body</span></b> </td>
+          </tr>
+          <tr valign="top">
+            <td rowspan="2"> <span>Создать коллекцию (или добавить ресурс )</span> </td>
+            <td> <span class="code bold">POST</span> </td>
+            <td> <span class="code">/</span> </td>
+            <td> <span class="code">{"_collection": "resources"}</span> </td>
+            <td><br>
+            </td>
+            <td> <span class="code">201 Created</span> (Коллекция успешно создана.)
+            </td>
+            <td> <span class="code">{"_uri":"/resources"}</span> </td>
+            <td> <span class="code">409 Conflict</span> <i>(Противоречивое состояние.)</i> </td>
+            <td> <span class="code">{"errors":{"resources":["Collection exists."]}}</span>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td> <span class="code bold">POST</span> </td>
+            <td> <span class="code">/resources</span> </td>
+            <td> <span class="code">{"name":"N1",<br />"count":25}</span> </td>
+            <td><br>
+            </td>
+            <td> <span class="code">201 Created</span> (Ресурс успешно создан.)
+            </td>
+            <td> <span class="code">{"_uri":"/resources/1"}</span> </td>
+            <td> <span class="code">422 Unprocessable Entity</span> <i>(Данные
+                не обработаны из-за ошибок.)</i> </td>
+            <td> <span class="code">{"errors":{"name":["description"]}}</span>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td rowspan="2"> <span>Считать коллекцию ресурсов</span> </td>
+            <td rowspan="2"> <span class="code bold">GET</span> </td>
+            <td rowspan="2"> <span class="code">/resources</span> </td>
+            <td rowspan="2"> <span class="code">{"filter":{"name":"N*"},
+                "columns": ["name"]} </span></td>
+            <td><br>
+            </td>
+            <td> <span class="code">200 OK</span> </td>
+            <td> <span class="code">[{"id":1,"name":"N1"},<br />{"id":2,"name":"N2"}]</span>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td><br>
+            </td>
+            <td> <span class="code">204 No Content</span> (Пустое значение. Но
+              это не ошибка.) </td>
+            <td> <span class="code">[]</span> </td>
+            <td>
+              <p align="center"> <br>
+              </p>
+            </td>
+            <td> <span class="code">{"warnings":["No content"]}</span> </td>
+          </tr>
+          <tr valign="top">
+            <td> <span>Считать ресурс</span> </td>
+            <td> <span class="code bold">GET</span> </td>
+            <td> <span class="code">/resources/1</span> </td>
+            <td> <br>
+            </td>
+            <td><br>
+            </td>
+            <td> <span class="code">200 OK</span> </td>
+            <td> <span class="code">{"id":1,"name":"N1",<br />"count": 25}</span> </td>
+            <td> <span class="code">404 Not Found</span> <i>(Ресурс не
+                найден.) </i></td>
+            <td> <span class="code">{"errors":[{"1": "Not found"]}}</span> </td>
+          </tr>
+          <tr valign="top">
+            <td> <span>Изменить существующий ресурс (часть данных)</span> </td>
+            <td> <span class="code bold">PATCH</span> </td>
+            <td>
+              <pre><font style="font-size: 9pt">
+<span class="code">/resources/1</span></font></pre>
+              <font style="font-size: 9pt"> </font></td>
+            <td> <span class="code">{"name": "New"}</span> </td>
+            <td><br>
+            </td>
+            <td> <span class="code">200 OK</span> </td>
+            <td> <span class="code">{"id":1,"name":"New"}</span> </td>
+            <td> <span class="code">422 Unprocessable Entity</span> </td>
+            <td> <span class="code">{"errors":{"name": "description"}}</span> </td>
+          </tr>
+          <tr valign="top">
+            <td> <span>Заменить существующий ресурс (все данные), иногда: добавить
+                новый ресурс</span> </td>
+            <td> <span class="code bold" style="color:#ce181e;">PUT</span> </td>
+            <td> <span class="code" style="color:#ce181e;">/resources/1</span>
+            </td>
+            <td> <span class="code" style="color:#ce181e;">{"name": "New", "count": 42}</span> </td>
+            <td><br>
+            </td>
+            <td> <span class="code" style="color:#ce181e;">200 OK</span> </td>
+            <td> <span class="code" style="color:#ce181e;">{"id":1, "name":"New",<br />"count": 25}</span> </td>
+            <td> <span class="code" style="color:#ce181e;">422 Unprocessable Entity</span> </td>
+            <td> <span class="code" style="color:#ce181e;">{"errors":{"name":
+                "description"}}</span> </td>
+          </tr>
+          <tr valign="top">
+            <td> <span>Удалить ресурс</span> </td>
+            <td> <span class="code bold">DELETE</span> </td>
+            <td> <span class="code">/resources/1</span> </td>
+            <td> <br>
+            </td>
+            <td><br>
+            </td>
+            <td>
+              <pre class="code"><span class="code">200 OK</span>
+            </pre>
+            </td>
+            <td>
+              <pre><span class="code">{"id":1,"name":"New",<br />"count": 25}</span>
+            </pre>
+            </td>
+            <td> <span class="code">404 Not Found</span>
+              <p></p>
+            </td>
+            <td> <span class="code">{"errors":[{"1": "Not found"]}}</span> </td>
+          </tr>
+          <tr valign="top">
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td><br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <span class="code">401 Unauthorized</span> <i>(Клиент не
+                авторизован.) </i></td>
+            <td> <span class="code">{"errors":[{"1": "Not authorized"]}}</span>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td><br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <span class="code">403 Forbidden</span> <i>(Недостаточно прав
+                для выполнения действия.)</i> </td>
+            <td> <span class="code">{"errors":[{"1": "Access denied"]}}</span>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td><br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <br>
+            </td>
+            <td> <span class="code">410 Gone</span> <i>(Ресурс удалён ранее.) </i></td>
+            <td> <span class="code">{"errors":[{"1": "Resource deleted"]}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <span class="subheader">Примеры запросов и ответов</span>. <br>
+      <table style="width: 80%;" cellspacing="0" cellpadding="4" border="1">
+        <colgroup><col width="10*"> <col width="57*"> <col width="189*"> </colgroup>
+        <tbody>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#000099;">→</span>
+            </td>
+            <td width="22%"> <span style="color:#000099;">Запрос на web-сервер</span>
+            </td>
+            <td>
+              <pre class="code bold" style="color:#000099;">POST /books
+</pre>
+              <pre class="code">Host: localhost
+Cookie: session_id=47538da6-8c6a-46cb-a9ca-a1b62bd23d39
+Content-Type: application/json; charset=utf-8
+\r\n
+</pre> <span class="code"> {"title": "Програмирование на языке Perl 5",
+                "author_ids": [5], "year": 2007, "publishing_house_ids":
+                [101,102] , "place_id": 55, "pages": 279, "series": "Основы
+                информационных технологий", "ISBN":
+                ["5-94774-604-2","5-9556-0078-7"], "language_code":"RU"} } </span>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#ce181e;">△</span>
+            </td>
+            <td width="22%"> <span style="color:#ce181e;">Данные для обработки
+                в приложении</span> </td>
+            <td width="74%"> <span class="code" style="color:#ce181e;">
+                {"action": "create", "resource": "books", "class": "Book",
+                "data": { ... }, "role_id": 2} </span> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#000099;">←</span>
+            </td>
+            <td width="22%"> <span style="color:#006600;">Ответ приложения</span>
+            </td>
+            <td width="74%"> <span class="code" style="color:#006600;">{"result":
+                "CREATED", "resource_uri": "/books/25"}</span> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text"> <span>По идентификатору сеанса (<span class="code">session_id=47538da6-8c6a-46cb-a9ca-a1b62bd23d39</span>)
+        на сервере определён <span class="italicized">пользователь</span>, а
+        затем и <span class="italicized">роль</span> пользователя (например, <span
+          class="code">"role_id": 2</span>), с которой связаны его <span class="italicized">права
+          доступа</span> (разрешённые действия).</span> <br>
+      <br>
+    </div>
+    <div class="text">
+      <table style="width: 80%;" cellspacing="0" cellpadding="4" border="1">
+        <colgroup><col width="10*"> <col width="57*"> <col width="189*"> </colgroup>
+        <tbody>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#000099;">→</span>
+            </td>
+            <td width="22%"> <span style="color:#000099;">Запрос на web-сервер</span>
+            </td>
+            <td>
+              <pre class="code bold" style="color:#000099;">GET /books/25
+</pre>
+              <pre class="code" style="color:#000099;">Host: localhost
+Content-Type: application/json; charset=utf-8
+\r\n
+{"session_id": "47538da6-8c6a-46cb-a9ca-a1b62bd23d39"}
+</pre> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#ce181e;">△</span>
+            </td>
+            <td width="22%"> <span style="color:#ce181e;">Данные для обработки
+                в приложении</span> </td>
+            <td width="74%"> <span class="code" style="color:#ce181e;">
+                {"action": "find", "resource": "books", "class": "Book", "data":
+                {"resource_id": 25}, "role_id": 2} </span> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#006600;">←</span>
+            </td>
+            <td width="22%"> <span style="color:#006600;">Ответ приложения</span>
+            </td>
+            <td width="74%"> <span class="code" style="color:#006600;">
+                {"result": "FOUND", "resource":"books", "resource_id": 25,
+                "data": {"title": "Програмирование на языке Perl 5", "authors":
+                ["Шохирев М. В."], "year": 2007, "publishing_house": ["ИНТУИТ",
+                "Бином"], "place": "М.", "pages": 279, "series": "Основы
+                информационных технологий", "ISBN":
+                ["5-94774-604-2","5-9556-0078-7"], "language":"Русский",
+                "categoris": ["Программирование", "Perl", "ИТ", "Разработка"]}
+                }} </span> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text"> <span>При пакетном тестировании идентификатор сеанса
+        может передаваться в теле запроса, если это предусмотрено
+        приложением,например: <span class="code">{"session_id":
+          "47538da6-8c6a-46cb-a9ca-a1b62bd23d39"}</span> .</span> <br>
+      <br>
+      <table style="width: 80%;" cellspacing="0" cellpadding="4" border="1">
+        <colgroup><col width="10*"> <col width="57*"> <col width="189*"> </colgroup>
+        <tbody>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#000099;">→</span>
+            </td>
+            <td width="22%"> <span style="color:#000099;">Запрос на web-сервер</span>
+            </td>
+            <td width="74%">
+              <pre class="code bold" style="color:#000099;">PATCH /books/53
+</pre>
+              <pre class="code" style="color:#000099;">Host: localhost
+Cookie: session_id=47538da6-8c6a-46cb-a9ca-a1b62bd23d39
+Content-Type: application/json; charset=utf-8
+\r\n
+{"data": {"place_id": 541}}
+</pre> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#ce181e;">△</span>
+            </td>
+            <td width="22%"> <span style="color:#ce181e;">Данные для обработки
+                в приложении</span> </td>
+            <td width="74%"> <span class="code" style="color:#ce181e;">
+                {"action": "update", "resource": "books", "class": "Book",
+                "resource_id": 53, "data": {"place_id": 541}, "role_id": 2} </span>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#006600;">←</span>
+            </td>
+            <td> <span style="color:#006600;">Ответ приложения</span> </td>
+            <td width="74%"> <span class="code" style="color:#006600;">{"result":
+                "UPDATED", "updated": "Mon, 18 Oct 2021 15:05:25 GMT"}</span> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text"> <span>Кроме результата, данные в ответе могут содержать
+        дополнительную информацию, например: <span class="code">"updated":
+          "Mon, 18 Oct 2021 15:05:25 GMT"}</span> .</span> </div>
+    <br>
+    <div class="text">
+      <table style="width: 80%;" cellspacing="0" cellpadding="4" border="1">
+        <colgroup><col width="10*"> <col width="57*"> <col width="189*"> </colgroup>
+        <tbody>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#000099;">→</span>
+            </td>
+            <td width="22%"> <span style="color:#000099;">Запрос на web-сервер</span>
+            </td>
+            <td width="74%">
+              <pre class="code bold">GET /books
+</pre>
+              <pre class="code">Host: localhost
+Cookie: session_id= 2690f82d-337a-4e36-adaa-1d026091c279
+Content-Type: application/json; charset=utf-8
+\r\n
+{"filter": {"author": "Пирогов"}}
+</pre> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#ce181e;">△</span>
+            </td>
+            <td> <span style="color:#ce181e;">Данные для обработки в приложении</span>
+            </td>
+            <td width="74%"> <span class="code" style="color:#ce181e;">
+                {"action": "find", "resource": "books", "class": "Book",
+                "filter": {"author": "Пирогов"}, "role_id": 9 } </span> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#006600;">←</span>
+            </td>
+            <td width="22%"> <span style="color:#006600;">Ответ приложения</span>
+            </td>
+            <td width="74%">
+              <pre class="code" style="color:#006600;">{"result": "FOUND", "resource": "books", "data": [
+ {"id": 123, "authors": ["Пирогов В. Ю."], "title": "Ассемблер. Учебный курс", ...},
+ {"id": 234, "authors": ["Пирогов В. Ю."], "title": "Ассемблер для Windows", ...},
+ {"id": 345, "authors": ["Пирогов В. Ю."], "title": "Ассемблер и дизассемблирование",...}
+]}
+</pre> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text"> <span>Условия выборки данных записываются в виде,
+        известном приложению на сервере: например, <span class="code">"filter":
+          {"author": "Пирогов"}</span> .</span> </div>
+    <br>
+    <div class="text">
+      <table style="width: 80%;" cellspacing="0" cellpadding="4" border="1">
+        <colgroup><col width="10*"> <col width="57*"> <col width="189*"> </colgroup>
+        <tbody>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#000099;">→</span>
+            </td>
+            <td width="22%"> <span style="color:#000099;">Запрос на web-сервер</span>
+            </td>
+            <td width="74%">
+              <pre class="code bold" style="color:#000099;">DELETE /books/78
+</pre>
+              <pre class="code" style="color:#000099;">Host: localhost
+Cookie: session_id=47538da6-8c6a-46cb-a9ca-a1b62bd23d39
+Content-Type: application/json; charset=utf-8
+\r\n
+{"resource_id": 78}
+</pre> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#ce181e;">△</span>
+            </td>
+            <td width="22%"> <span style="color:#ce181e;">Данные для обработки
+                в приложении</span> </td>
+            <td width="74%"> <span class="code" style="color:#ce181e;">
+                {"action": "delete", "resource": "books", "class": "Book",
+                "resource_id": 78, "role_id": 2} </span> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#006600;">←</span>
+            </td>
+            <td width="22%"> <span style="color:#006600;">Ответ приложения</span>
+            </td>
+            <td width="74%">
+              <pre><span class="code" style="color:#006600;">{"result": "DELETED"}</span>
+            </pre>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text"> <span>Идентификатор ресурса может передаваться в данных,
+        если этого требует приложение, например: <span class="code">"resource_id":
+          78</span>.</span> </div>
+    <br>
+    <div class="text">
+      <table style="width: 80%;" cellspacing="0" cellpadding="4" border="1">
+        <colgroup><col width="10*"> <col width="57*"> <col width="189*"> </colgroup>
+        <tbody>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#000099;">→</span>
+            </td>
+            <td width="22%"> <span style="color:#000099;">Запрос на web-сервер</span>
+            </td>
+            <td width="74%">
+              <pre class="code bold" style="color:#000099;">PATCH /books/78
+</pre>
+              <pre class="code" style="color:#000099;">Host: localhost
+Cookie: session_id=47538da6-8c6a-46cb-a9ca-a1b62bd23d39
+Content-Type: application/json; charset=utf-8
+\r\n
+{"data": {"pages": 704}}
+</pre> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#ce181e;">△</span>
+            </td>
+            <td width="22%"> <span style="color:#ce181e;">Данные для обработки
+                в приложении</span> </td>
+            <td width="74%"> <span class="code" style="color:#ce181e;">
+                {"action": "update", "resource": "books", "class": "Book",
+                "resource_id": 78, "data": {"pages": 704}, "role_id": 2} </span>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#006600;">←</span>
+            </td>
+            <td width="22%"> <span style="color:#006600;">Ответ приложения</span>
+            </td>
+            <td width="74%"> <span class="code" style="color:#006600;">{"result":
+                "UNFOUND"}</span> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text"> <span>Ресурс с таким идентификаторм не существует,
+        поэтому он не был изменён.</span>
+      <p></p>
+    </div>
+    <br>
+    <div class="text">
+      <table style="width: 80%;" cellspacing="0" cellpadding="4" border="1">
+        <colgroup><col width="10*"> <col width="57*"> <col width="189*"> </colgroup>
+        <tbody>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#000099;">→</span>
+            </td>
+            <td width="22%"> <span style="color:#000099;">Запрос на web-сервер</span>
+            </td>
+            <td width="74%">
+              <pre class="code bold" style="color:#000099;">PATCH /books/25
+</pre>
+              <pre class="code">Host: localhost
+Cookie: session_id=2690f82d-337a-4e36-adaa-1d026091c279
+Content-Type: application/json; charset=utf-8
+\r\n
+{"data": {"year": 2006}}
+</pre> </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <font color="#ce181e"><span style="font-size: large;">△</span></font>
+            </td>
+            <td width="22%"> <span style="color:#ce181e;">Данные для обработки
+                в приложении</span> </td>
+            <td width="74%"> <span class="code" style="color:#ce181e;">
+                {"action": "update", "resource": "books", "class": "Book",
+                "resource_id": 78, "data": {"year": 2006}, "role_id": 9} </span>
+            </td>
+          </tr>
+          <tr valign="top">
+            <td width="4%"> <span style="font-size:large; color:#006600;">←</span>
+            </td>
+            <td width="22%"> <span style="color:#006600;">Ответ приложения</span>
+            </td>
+            <td width="74%"> <span class="code" style="color:#006600;">{"result":
+                "FORBIDDEN"}</span> </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text">
+      <p align="left"> <span>Для указанной роли нет права изменять этот ресурс.</span>
+      </p>
+    </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">
+      <p> <span>REST — архитектурный стиль для создания распределённых
+          программных систем: ориентированный на ресурсы, отлично
+          масштабируемый, гибко адаптируемый, простой и понятный, легко
+          реализуемый на любом языке программирования.</span></p>
+      <hr> <span class="header">Q&amp;A.</span> <br>
+      <span class="bold">Q:</span> ? <br>
+      <span class="bold">A:</span> ! <br>
+      <hr> <span class="header">Вопросы для самопроверки.</span> <br>
+      <ul>
+        <li><span>REST — что это: протокол? архитектурный стиль? программный продукт?</span></li>
+        <li><span>При разработке web-приложения в стиле REST кто отвечает за сохранение состояния: клиент или сервер?</span></li>
+        <li><span>На какие 2 вида подразделяются ресурсы?</span></li>
+        <li><span>Что используется как уникальный идентификатор ресурса?</span></li>
+        <li><span>Какие операции применяются для работы с ресурсами?</span></li>
+        <li><span>Чем отличаются операции PUT и PATCH?</span></li>
+        <li><span>В каком виде запрашиваются представления ресурсов?</span></li>
+      </ul>
+      <hr> <span class="header">Задания.</span> <br>
+      A01. <br>
+      ... <br>
+      <hr> <span class="header">Ссылки:</span>
+      <ul>
+        <li><a href="https://ru.wikipedia.org/wiki/REST">О REST в Википедии.</a></li>
+        <li><a href="https://github.com/mike-shock/Programmers_Club-Caiman/blob/master/presentations/rest_intro.pdf">Презентация
+            "Введение в REST".</a></li>
+      </ul>
+      <hr> </div>
+    <hr> <a href="_00-content.html">Содержание</a>
+  </body>
+</html>

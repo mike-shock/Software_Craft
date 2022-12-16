@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>H00. HTML</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr>
+    <div class="text"> <span class="header">HTML.</span> <br>
+      <br>
+      <span class="subheader">Разметка. Тэги.</span> <br>
+      <br>
+      <span class="code">HTML</span> (<span class="code">HyperText Markup
+        Language</span>) — язык (а точнее — формат) разметки гипертекста.
+      Гипертекстом называется потому, что содержит гиперссылки (<span class="code">hyperlink</span>)
+      на другие документы в формате HTML. HTML-документы часто также называют
+      web-страницами.Есть несколько версий HTML, но лучше ориентироваться на
+      последнюю общепринятую версию HTML5.</div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Разметка состоит из маркеров, тэгов (<span class="code">tag</span>),
+      которые задают структуру документа: заголовки, абзацы, разделы, части,
+      таблицы, изображения и т. д.</div>
+    <div class="text">При разметке тэги обычно употребляются в паре: например,
+      открывающий тег <code>&lt;table&gt;</code> и закрывающий <code>&lt;/table&gt;</code>
+      описывают. элемент "таблица", в котором (как в контейнере) будут
+      содержаться элементы "строка таблицы" (<code>&lt;tr&gt;</code> и <code>&lt;/tr&gt;</code>),
+      а в каждой строке — элементы "ячейка таблицы" (<code>&lt;td&gt;</code> и <code>&lt;/td&gt;</code>).
+      А уже в каждой ячейке будет размещаться полезное содержимое: текст,
+      изображения и т. п.</div>
+    <div class="text">Некоторые тэги описывают элементы для вставки внешних
+      объектов, например, изображений. Такие элементы могут описываться одним
+      тегом, без парного закрывающего.</div>
+    <div class="text"><code>&lt;img src="logo.png" alt="Логотип" width="128"
+        height="128" /&gt;</code></div>
+    <div class="text"><br>
+    </div>
+    <div class="text"> Примеры:
+      <pre class="code"><span class="code bold">Основные части документа HTML:</span>
+  &lt;!DOCTYPE html&gt;<br>  <strong>&lt;html&gt;</strong>
+    <strong>&lt;head&gt;</strong>
+      &lt;!-- то, что описано в HEAD, не отображается на странице --&gt;
+      <strong>&lt;title&gt;</strong>Название документа в <strong></strong>заголовке окна или вкладки браузера<strong>&lt;/title&gt;</strong>
+      &lt;!-- <br>        "технические" описания того, что требуется для показа страницы в браузере:<br>        язык текста, кодировка символов, ссылки на стилевую таблицу и загружаемые программы на JavaScript<br>      --&gt;
+      &lt;meta charset="UTF-8"&gt;
+      &lt;link rel="stylesheet" type="text/css" href="document.css" /&gt;
+      &lt;script src="document.js" type="application/javascript"&gt;&lt;/script&gt;<br>    <strong>&lt;/head&gt;</strong>
+    <strong>&lt;body&gt;</strong>
+      &lt;!-- в BODY описывается содержимое страницы --&gt;
+    <strong>&lt;/body&gt;</strong>
+  <strong>&lt;/html&gt;</strong>
+  </pre>
+      <span class="subheader">Атрибуты.</span></div>
+    <div class="text"><span class="subheader"><br>
+      </span></div>
+    <div class="text">В каждом тэге могут быть атрибуты, которые .</div>
+    <div class="text"><br>
+    </div>
+    <div class="text"><code>&lt;a <strong>href</strong>="https://hyperlink.w3schools.com"&gt;Текст
+        ссылки&lt;/a&gt;</code></div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Ещё...</div>
+    <div class="text"><br>
+      <hr> <br>
+      <span class="header">Q&amp;A.</span> <br>
+      <span class="bold">Q:</span> HTML — это язык программирования? <br>
+      <span class="bold">A:</span> Нет, это язык форматирования документа. Но в
+      документ HTML может быть встроена программа на языке JavaScript, которая
+      будет динамически изменять содержимое документа. </div>
+    <div class="text"><span class="bold">Q:</span> Какие ещё языки разметки
+      есть, кроме HTML? <br>
+      <span class="bold">A:</span> У HTML есть "прародитель": XML (eXtensible
+      Markup Language) — «расширяемый язык разметки». И HTML является
+      подмножеством XML. Этот формат «расширяемый», потому что он задаёт общие
+      правила, по которым делаются разные языки разметки со своими наборами
+      тэгов и их атрибутов. Так, например, можно описать книгу:</div>
+    <div class="text">
+      <pre class="code"><strong>&lt;book</strong> ISBN="978-5-4461-1910-3"<strong>&gt;</strong>
+  <strong>&lt;title</strong> original="Clean Craftsmanship: Disciplines, Standards, and Ethics"<strong>&gt;<br></strong><strong>"</strong><strong><strong></strong></strong>Идеальная работа. Программирование без прикрас<strong><strong><strong></strong></strong>"</strong><strong>&lt;/title&gt;</strong>
+<strong> <strong> &lt;author</strong></strong> original="Martin, Robert"<strong><strong>&gt;Мартин, Роберт</strong><strong><strong>&lt;/</strong></strong></strong><strong><strong><strong><strong><strong>author</strong></strong>&gt;</strong>
+</strong></strong><strong><strong> <strong> &lt;year</strong></strong></strong> original=2021<strong><strong><strong>&gt;</strong></strong></strong>2022<strong><strong><strong><strong>&lt;/</strong></strong></strong></strong><strong><strong><strong><strong><strong><strong><strong>year&gt;</strong></strong></strong></strong></strong></strong><strong><strong><strong></strong>
+</strong></strong></strong><strong><strong><strong> <strong> &lt;publisher</strong></strong></strong></strong> original="Addison-Wesley"<strong><strong><strong><strong>&gt;</strong></strong></strong></strong>Питер<strong><strong><strong><strong><strong>&lt;/</strong></strong></strong><strong><strong><strong><strong><strong></strong></strong></strong></strong></strong></strong></strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>publisher</strong></strong></strong></strong></strong></strong>&gt;</strong>
+</strong></strong></strong>&lt;book&gt;</strong></pre>
+    </div>
+    <div class="text">
+      <hr> <span class="header"></span>
+      <hr> <span class="header">Задания.</span> <br>
+      H00. Сделать страницу, в которой разместить 4 раздела: верх, левая
+      колонка, центральная часть и подножие страницы.</div>
+    <div class="text">В верхней части поместить приветствие. В левой колонке —
+      оглавление страницы (список разделов со ссылками на каждый из них). в
+      центральной части — разделы с информацией (не меньше 3-х). А в нижней
+      части пусть будет контактная информация и заметки об авторском праве.<br>
+      ... <br>
+      <hr> <span class="header">Ссылки:</span>
+      <ul>
+        <li><a href="https://html5book.ru/html-tags/">Изучение HTML: руководства
+            и уроки.</a></li>
+        <li><a href="https://www.w3schools.com/html/">Учебник по HTML</a>
+          (Google-перевод на русский)</li>
+        <li><a href="https://developer.mozilla.org/ru/docs/Learn/HTML">HTML-элементы.</a></li>
+        <li><a href="https://webref.ru/layout/learn-html-css">Уроки по HTML и
+            CSS.</a></li>
+      </ul>
+      <hr> </div>
+    <hr> <a href="_00-content.html">Содержание</a>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>D03. Hash</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+ <a href="_00-content.html">Содержание</a>
+ <hr />
+ <div class="text">
+ <span class="header">Ассоциативные массивы.</span> <br />
+ <br />
+Ассоциативный массив (<span class="code">associative array</span>) в разных языках может называться: 
+словарь (<span class="code">Dictionary</span>), хэш (<span class="code">Hash</span>, <span class="code">hash table</span>), отображение (<span class="code">Map</span>). 
+Он называется ассоциативным массивом, поскольку, как и массив, хранит список, но для доступа к значению элемента используется не числовой индекс, 
+а «имя» (или «ключ», <span class="code">key</span>) произвольного типа, с которым «ассоциируется» конкретное значение (<span class="code">value</span>).
+Ключ - это уникальный идентификатор для поиска значения в хэше. <br />
+Элемент хэша (ключ и связанное с ним значение) называют «парой» (<span class="code">key-value pair = KVP</span>).
+Подобным образом, например, в анкете каждый ответ (значение) сопоставляется с вопросом («заголовком», именем, ключом):<br />
+<table border="1" cellpadding="3" cellspacing="0">
+ <tr> <th>ключ / key</th>      <th>значение / value</th> </tr>
+ <tr> <td><span class="code">"ФИО"</span></td>           <td><span class="code">"Достоевский Фёдор Михайлович"</span></td> </tr>
+ <tr> <td><span class="code">"Дата рождения"</span></td> <td><span class="code">1821.11.11</span></td> </tr>
+ <tr> <td><span class="code">"Профессия"</span></td>     <td><span class="code">["писатель", "публицист", "мыслитель"]</span></td> </tr>
+</table>
+<br />
+Можно создать пустой хэш:
+<pre class="code">
+# Perl:
+    %languages = ();
+# Ruby:
+    languages = {}
+// JavaScript:
+    var languages = {};
+</pre>
+<br />
+Но часто при создании хэша удобно сразу присвоить ему начальное значение в виде литерала (списка пар «ключ и значение»):
+<pre class="code">
+# Perl:
+    %languages = ("Perl" => 1987, "PL/1" => 1964, "COBOL" => 1959);
+# Ruby:
+    languages = {"Ruby" => 1995, "Java" => 1995}              # ключи в виде строк (класс String)
+// JavaScript:
+    var languages = {"C":1972, "Lisp":1958, "Fortran":1957};
+# Python:
+    languages = {"C++": 1985, "Python": 1991, 'Haskell': 1990}
+// PHP:
+    $languages = array("Swift" => 2014, "PHP" => 1995, "JavaScript" => 1995);
+// Kotlin:
+    val languages = mapOf("Kotlin" to 2011, "C++" to 1983)
+</pre>
+
+По ключу можно получить доступ в хэше к значению элемента, чтобы добавить или изменить его (присвоить новое значение):
+<pre class="code">
+    languages[key] = value
+
+    $languages{"Perl"} = 1987;                                # Perl
+    $languages['PHP'] = 1995;                                 # PHP
+    languages["Ruby"] = 1995                                  # Ruby
+    languages["JavaScript"] = 1995;                           // JavaScript
+    languages['Python'] = 1991                                # Python
+    languages["Kotlin"] = 2011                                // Kotlin
+</pre>
+По ключу из хэша можно счтать значение элемента:
+<pre class="code">
+    value = languages[key]
+
+    $languages{"Perl"}                                        #-->  1987
+    $languages['PHP']                                         #-->  1995
+    languages["Ruby"]                                         #-->  1995
+    languages["JavaScript"]                                   //--> 1995
+    languages['Python']                                       #-->  1991
+    languages["Kotlin"]                                       //--> 2011
+</pre>
+
+Ключи могут быть разных типов:
+<pre class="code">
+# Ruby:
+    { Time.now.to_datetime => message }                       # класс DateTime в качестве ключа
+    { 3.141592653 => "число π" }                              # ключ в виде дробного числа (класс Float)
+    { Go: 2009, Scala: 2004, Oberon: 1986 }                   # ключи в виде символов (класс Symbol)
+    { ['56°05′N', '63°38′E'] => 'Шадринск' }                  # массив (класс Array) в качестве ключа
+</pre>
+
+Перебор элементов (ключей и значений) в хэше:
+<pre class="code">
+  while (my ($key, $value)=each %languages) {                 # Perl
+    print($value);
+  };
+
+  languages.each_pair { |key, value|                          # Ruby
+    print key, value
+  } // или:
+  languages.keys.each do |key|                                # Ruby
+    print languages[key]
+  end
+
+  var keys = Object.keys(languages);                          // JavaScript
+  for(k in keys) {
+    key = keys[k];
+    console.log(languages[key]);
+
+  for key in languages.keys():                                # Python
+	print(languages[key])
+</pre>
+
+Хэши часто используются для хранения характеристик какого-то информационного объекта (имён и значений его атрибутов). 
+Например, набор данных, описывающих язык программирования в виде хэша:
+<pre class="code">
+var ruby = {"name": "Ruby", "created": 1995, "author": "松本 行弘", "version": 3.0, "released": "2021-07-07"}; // JavaScript
+</pre>
+ А записи о нескольких объектах можно представить в виде списка хэшей:
+<pre class="code">
+var languages = [ ruby,
+  {"name": "Perl", "created": 1987, "author": "Larry Wall", "version": 5.34, "released": "2021-05-20"},
+  {"name": "Java", "created": 1995, "author": "James Gosling", "version": 17.0, "released": "2021-09-14"},
+]; // JavaScript
+</pre>
+Хэши и массивы хэшей широко применяются при обмене между клиентской и серверной частями web-приложения. 
+Но перед передачей по сети данные нужно сериализовать (<span class="code">serialize</span>):
+преобразовать в структурированную строку. Для этого часто используется формат <a href="D04-json.html">JSON</a>.
+<br /><br />
+Для работы с более сложными структурами такими, как графы и деревья, требуется использовать <a href="D05-dynamic_data_structures.html">динамические структуры данных</a>.
+<hr />
+<span class="header">Задание DH#01.</span><br />
+Написать функцию <span class="code">department_list()</span>, которая формирует список подразделений 
+(данные о каждом подразделении в виде хэша) и возвращает массив хэшей в качестве результата.
+<br /><br />
+<span class="header">Задание DH#02.</span><br />
+Написать на JavaScript функцию <span class="code">departments_for_select(department_list)</span>, 
+которая принимает массив хэшей со списком подразделений и формирует из него в документе HTML таблицу с перечнем подразделений. 
+ <hr />
+ </div>
+ <a href="_00-content.html">Содержание</a>
+</body>
+</html>

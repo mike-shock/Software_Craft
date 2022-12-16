@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>O03. Inheritnce</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+ <a href="_00-content.html">Содержание</a>
+ <hr />
+ <div class="text">
+ <span class="header">Наследование.</span> <br />
+ <br />
+В ООП есть очень мощный механизм — наследование (<span class="code">inheritance</span>).
+С помощью наследования можно создавать новые классы на основе существующих.
+При этом новый (дочерний) класс "по наследству" получает все свойства и методы существующего (родительского) класса.
+Но в дочернем классе можно описывать дополнительные свойства и методы. А также переопределять методы родительского класса.
+<br />
+<br />
+В этом примере на основе класса "Подразделение" (<span class="code">Department</span>) 
+описывается класс "Удалёное подразделение" (<span class="code">RemoteDivision</span>):
+  <pre class="code">
+# Ruby:
+<b class="code">class RemoteDivision &lt; Department </b>
+  def initialize(id, code, name, parent_id, remote_address_id)
+    super(id, code, name, parent_id);
+    @remote_address_id = remote_address_id
+  end
+<b class="code">end </b>
+
+// JavaScript:
+<b class="code">class RemoteDivision extends Department { </b>
+  constructor(id, code, name, parent_id, remote_address_id) {
+    super(id, code, name, parent_id);
+    this.remote_address_id = remote_address_id;
+  }
+<b class="code">}</b>
+  </pre>
+Наследование сокращает размер исходников, позволяет вносить изменения в единственном месте.
+  <hr />
+ </div>
+ <a href="_00-content.html">Содержание</a>
+</body>
+</html>

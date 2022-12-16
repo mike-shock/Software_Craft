@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>P01-Program</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+ <a href="_00-content.html">Содержание</a>
+ <hr />
+ <span class="header">Программа.</span>
+ <pre>
+  Любую программу можно разделить на нескольких частей, которые отличаются по назначению синтаксических конструкций.
+  
+  Обычно в начале программы подключаются программные библиотеки (пакеты), в которых содержатся нужные подпрограммы.
+  <code>
+  // JavaScript:
+  &lt;script src='library.js'&gt;&lt;/script&gt;
+
+  # Ruby:
+  require 'date'
+
+  # Python:
+  import datetime
+  </code>
+  Затем размещаются описания подпрограмм, которые будут вызываться в основной программе.
+  <code>
+  // JavaScript:
+  function weekday(weekday_names) {
+    var now = new Date();
+    var day = now.getDay();
+    var weekday = weekday_names[day];
+    return weekday;
+  }
+
+  # Ruby:
+  def weekday(weekday_names)
+    now = Time.now
+    var day = now.wday
+    var weekday = weekday_names[day]
+    return weekday
+  end
+  </code>
+  Далее размещаются описания переменных для данных, которые будут использоваться в основной программе.
+  <code>
+  // JavaScript:
+  var weekday_names = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
+
+  # Ruby:
+  weekday_names = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота']
+  </code>
+  В конце следуют команды обработки данных в основной программе. Среди них обязательно будут команды ввода-вывода.
+  <code>
+  // JavaScript:
+  &lt;script&gt;
+    var today = weekday(weekday_names);
+    document.write(today);
+  &lt;/script&gt;
+
+  # Ruby:
+    today = weekday(weekday_names)
+    puts today
+  </code>
+  <hr />
+  <span class="header">Q&amp;A.</span>
+  <span class="bold">Q:</span> Какие есть правила для записи имён переменных?
+  <span class="bold">A:</span> Почти во всех языках переменные должны записываться латинскими буквами и цифрами, 
+  причём первая должна быть буква. в имени переменной допускается знак подчёркивания.
+  Переменные и имена подпрограмм чаще всего записываются либо так:
+  <code>
+  this_is_a_variable_name
+  this_is_a_function_name()
+  </code>
+  либо так (camel case):
+  <code>
+  thisIsAVariableName
+  thisIsAFunctionName()
+  </code>
+  Константы часто записываются заглавными буквами:
+  <code>
+  PI = 3.141592653
+  </code>
+  <hr />
+  <span class="header">Задания.</span>
+   P01.
+   Разместите примеры из этого раздела в документе HTML и посмотрите, как это работает..
+  <hr />
+ </pre>
+ <hr />
+ <a href="_00-content.html">Содержание</a>
+</body>
+</html>

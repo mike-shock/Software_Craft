@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>D02. Arrays</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr>
+    <div class="text"> <span class="header">Структуры данных.</span> <br>
+      <br>
+      Составные (<span class="code">aggregate</span>) типы данных могут хранить
+      уже не одиночные значения (как скаляры), а наборы значений (<span class="code">data
+        set</span>). Часто это последовательности значений (списки, массивы).
+      Агрегатные типы данных также имеют свои наборы операций. Например, для
+      массива (списка) типичны такие операции:
+      <ul>
+        <li> инициализация списка: <span class="code">seasons = ['весна',
+            'лето', 'осень', 'зима']</span> </li>
+        <li> доступ к элементу списка по индексу: <span class="code">seasons[0]
+            =
+            'весна';&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp; &nbsp; // Java</span> </li>
+        <li> вычисление размера списка: <span class="code">seasons.size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            # Ruby</span> </li>
+        <li> добавление в конец: <span class="code">seasons.append('зима')
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Python</span> </li>
+        <li> поиск элемента по значению: <span class="code">seasons.includes('лето')&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            // JavaScript</span> </li>
+        <li> выделение подмассива: <span class="code">seasons[1..2] #=&gt;
+            ['лето',
+            'осень']&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            # Ruby</span> </li>
+        <li> объединение массивов: <span class="code">['весна','лето'] +
+            ['осень','зима']&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            # Ruby</span> </li>
+        <li> ...
+        </li>
+      </ul>
+      Для типа данных «очередь» (<span class="code">queue</span>) типичны
+      операции добавления элементов в конец очереди (<span class="code">enqueue</span>)
+      и извлечения из начала (<span class="code">dequeue</span>).
+      <br>
+      <br>
+      <span class="header">Массивы.</span> <br>
+      <br>
+      В жизни очень часто используются разнообразные списки (<span class="code">list</span>):
+      последовательности, перечисления, наборы данных. Чаще всего в списках
+      хранятся данные одного типа. В реляционных базах данных обрабатываются
+      последовательности записей (строк, кортежей) в виде таблиц и курсоров
+      (выборок).
+      В языках программирования списки представлены в виде массивов. </div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Массив (<span class="code">array</span>) — это структура
+      данных для хранения упорядоченной последовательности элементов. Элементами
+      (<span class="code">item</span>) массива могут быть значения простых типов
+      данных или более сложные структуры данных. Причём в динамических языках (<span
+        class="code">Perl</span>, <span class="code">Ruby</span>, <span class="code">JavaScript</span>,
+      <span class="code">Python</span>, <span class="code">PHP</span>) элементы
+      массива могут быть разных типов. Массив может не содержать элементов, быть
+      пустым (<span class="code">empty array</span>). Во многих языках массивы —
+      динамические, то есть их можно расширять во время выполнения программы,
+      добавляя новые элементы, а также удаляя их.
+      <br>
+      Часто при создании массива он представляется в виде списка литералов (<span
+        class="code">literal</span>), то есть непосредственных значений
+      элементов. <br>
+      <pre class="code"><span class="code bold"># Ruby, Python:</span>
+a_i = [23, 24, 27, 12, 28]                 # массив целых чисел
+a_f = [23.03, 24.06, 27.07, 12.11, 28.11]  # массив дробных чисел
+a_s = ['Male', 'Female']                   # массив строк
+
+<span class="code bold">// JavaScript:</span>
+var a = [false, 1, [2], "Три", 4.0];       // массив данных разных типов
+
+<span class="code bold">// PHP:</span>
+$a_s = ["Один", "Два", "Три"];              // массив строк
+$a_e = [];                                  // пустой массив 
+$semaphore = array("red","yellow","green"); // массив строк
+</pre>
+      Добавляемые в массив элементы имеют порядковые номера, называемые
+      индексами (<span class="code">index</span>) элементов массива. Как
+      правило, нумерация элементов массива, начинается с нуля. Общее количество
+      элементов массива называется размером (<span class="code">size</span>) или
+      длиной (<span class="code">length</span>) массива; она на 1 больше
+      значения индекса последнего элемента.
+      <br>
+      <pre class="code"><span class="code bold"># Ruby</span>
+a_i[3]               # значение элемента с индексом 3 равно 12
+a_i[-2]              # тот же элемент, если считать индекс с конца
+a_i.length == a.size # есть 2 метода определения размера массива
+
+<span class="code bold"># Python</span>
+a_f[0]               # значение 0-го элемента равно 23.03
+print(len(a_f))      # длина массива равна 5
+
+<span class="code bold">// JavaScript</span>
+a[5] = "VI";          // добавить элемент "VI" с индексом 5
+size_of_a = a.length; // длина массива равна 6
+
+<span class="code bold">// PHP</span>
+$a_s[1] = 2;           // заменить значение "Два" на число 2
+print(sizeOf($a_s));   // размер массива == 3
+</pre>
+      Массивы могут эффективно использоваться для разных алгоритмов обработки
+      элементов:
+      <ul>
+        <li> итерация (<span class="code">iteration</span>): перебор в прямом
+          или обратном направлении;</li>
+        <li> очередь (<span class="code">queue</span>): «первый пришёл, первый
+          ушёл» (<span class="code">FIFO = first in, first out);</span></li>
+        <li> стек (<span class="code">stack</span>): «последний пришёл, первый
+          ушёл» (<span class="code">LIFO = last in, first out).</span></li>
+        <li> «двухконцевая очередь» (<span class="code">dequeue (deq) =
+            double-ended queue</span>) - структура, сочетающая возможности
+          очереди и стека для доступа к данным.</li>
+      </ul>
+      Перебор всех элементов массива в разных направлениях:<br>
+      <pre class="code"><span class="code bold">// JavaScript</span>
+for (var i = 0 ; i &lt; a.length; i++) { // от начала до конца
+  console.log('%d: %d', i, a[i]);
+}
+
+<span class="code bold">// PHP</span>
+for ($i = sizeOf($a)-1; $i &gt;= 0; $i--) { // от конца до начала
+  printf("%d %s\n", $i, $a[$i]);
+}
+
+<span class="code bold"># Python</span>
+for i in range(len(a_f)):        # перебор по индексу i
+    print(a_f[i])
+
+for element in a_f:              # перебор значений элементов списка
+    print(element)
+
+<span class="code bold"># Ruby</span>
+for element in a_i do            # перебор элементов итератором for
+  print element, "!\n"
+end
+
+a_i.each do |element|            # перебор элементов итератором each
+  print element, "\n"
+end
+
+for i in 0..a_i.size do          # перебор по индексу
+  print a_i[i], "\n"
+end
+</pre>
+      <span class="header">Многомерные массивы.</span> <br>
+      <br>
+      Элементом массива может быть другой массив, который называют вложенным. <br>
+      <pre class="code"><span class="code bold"># Ruby, Python</span>
+a_2d = [['56°05′N', '63°38′E'], ['34°36′S', '58°23′W']]	# координаты городов
+a_3d = [						# массив
+    [							# из 2-х массивов,
+	[1,1], [1,2], [1,3]				# каждый из которых
+    ],							# состоит
+    [							# из
+	[2,1], [2,2], [3,3]				# 3-х массивов,
+    ]							# состоящих
+]							# из 2-х элементов
+</pre>
+      <br>
+      Для доступа к элементам многомерных массивов нужно указывать их индексы в
+      каждом вложенном массиве:
+      <br>
+      <pre class="code">a_2d[0][0]	#--&gt; '56°05′N' - широта Шадринска: в 0-м списке 0-й элемент
+a_2d[0][1]	#--&gt; '63°38′E' - долгота Шадринска: в 0-м списке 1-й элемент
+a_2d[1][0]	#--&gt; '58°23′W' - долгота Буэнос-Айреса: в 1-м списке 0-й элемент
+</pre>
+      Часто в массивах хранятся записи об информационных объектах, каждый из
+      которых представлен в виде <a href="D03-hash.html">ассоциативного массива</a>.
+      <hr>
+      <span class="header">Задание DA#01.</span>
+      Написать функцию <span class="code">roles_list()</span>, которая
+      формирует список ролей пользователей (<span class="code">"Администратор",
+        "Библиотекарь", "Читетель", "Гость"</span>) в виде строк и возвращает
+      массив строк в качестве результата. <br>
+      <span class="header">Задание DA#02.</span>
+      Написать на JavaScript функцию <span class="code">roles_for_select(roles_list)</span>,
+      которая принимает массив строк со списком ролей пользователей и формирует
+      из него в документе HTML список выбора <span class="code">&lt;select
+        id="roles_list"&gt;...&lt;/select&gt;</span> c тегами <span class="code">&lt;option
+        id="N"&gt;</span> для каждой роли в списке, где N — индекс элемента
+      массива.
+      <br>
+      <span class="header">Задание DA#03.</span>
+      Написать на <span class="code">PHP</span> три функции для использования
+      массива в качестве стека (<span class="code">stack</span>). Функция <span
+        class="code">push</span> — добавление элемента в стек; <span class="code">pop</span>
+      — извлечение элемента из стека; <span class="code">is_empty()</span> —
+      проверка, пуст ли стек. Функции будут тестироваться таким образом:
+      <pre class="code">$stack = [];
+$stack = push($stack, 111);    // $stack == [111]
+$stack = push($stack, 222);    // $stack == [111, 222]
+$stack = push($stack, 333);    // $stack == [111, 222, 333]
+
+list($last_element, $stack) = pop($stack);
+printf("%d\n", $last_element); // $stack==[111, 222], $last_element==333
+$zero = is_empty($stack);      // $stack == [111, 222], $zero == 0
+printf("'%s'\n", $zero);
+
+list($last_element, $stack) = pop($stack);
+printf("%d\n", $last_element); // $stack == [111, 222], $last_element==333
+
+list($last_element, $stack) = pop($stack);
+printf("%d\n", $last_element); // $stack == [111, 222], $last_element==333
+
+$zero = is_empty($stack);      // $stack == [], $zero == 1
+printf("'%s'\n", $zero);
+</pre> <br>
+    </div>
+    <hr> <a href="_00-content.html">Содержание</a>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+* {
+  font-size: 12pt; font-family: Helvetica, sans-serif;
+}
+code {
+  font-size: 12pt; font-family: "FreeMono", monospace; font-weight: normal; color: #0000c7;
+}
+.code {
+  font-size: 12pt; font-family: "FreeMono", monospace; font-weight: normal; color: #0000c7;
+}
+strong {
+  font-size: 12pt; font-family: "FreeMono", monospace; font-weight: bold; color: #0000c7;
+}
+
+.header { font-size: 14pt; font-weight: bold; }
+.subheader { font-size: 12pt; font-weight: bold; }
+.text { text-align: justify; }
+.bold { font-weight: bold; }
+.centered { text-align: center }
+.italicized { font-style: italic; }
+.underlined { text-decoration: underline; text-decoration-style: solid; }
+.double-underlined { text-decoration: underline; text-decoration-style: double; }
+
+.large { font-size: 16pt;}
+.huge { font-size: 48pt;}
+
+ol.none { list-style-type: none; }
+
+.text {
+  text-align: justify;
+}

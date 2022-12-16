@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>P00. Algorithm</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+ <a href="_00-content.html">Содержание</a>
+ <hr />
+ <div class="text">
+ <span class="header">Алгоритм.</span> <br />
+ <br />
+Знаменитый Niklaus Wirth, создатель нескольких языков программирования, написал книгу, название которой выражает суть программирования:<br>
+<div class="centered header">
+«Алгоритмы + структуры данных = программы».<br />
+<img src="images/A+DS=P_Wirth.jpg" width="200">
+</div><br />
+<span class="italicized">Алгоритм</span> (<span class="code">algorithm</span>) — это последовательность инструкций для достижения результата. 
+В языках программирования алгоритмы записываются при помощи 3-х основных конструкций, 
+которые управляют ходом выполнения программы:
+ <ul>
+  <li> последовательность; </li>
+  <li> выбор; </li>
+  <li> цикл. </li>
+ </ul>
+Эти конструкции удобно представлять в виде диаграмм Насси-Шнейдермана (<span class="code">Nassi-Shneiderman diagram</span>, <span class="code">NSD</span>), 
+называемых также структограммы (<span class="code">structogram</span>).
+<br /><br />
+ <span class="header">Последовательность.</span> <br />
+<br />
+<span class="italicized">Последовательность</span> (<span class="code">sequence</span>) — это просто выполнение действий (инструкций, команд, операторов) в том порядке, 
+как они записаны в программе.<br />
+<br /><img src="images/structograms-sequence.png" /><br />
+В программе на языке <span class="code">Ruby</span> подобная последовательность может выглядеть так:
+  <pre class="code">
+    file = File.open(file_name)
+    s1, s2 = read_and_sum_numbers_from(file)
+    print(s1, s2)
+    file.close()
+  </pre>
+ <span class="header">Выбор.</span> <br />
+<br />
+<span class="italicized">Выбор</span> (<span class="code">choice</span>) или <span class="italicized">ветвление</span> (<span class="code">branching</span>) — 
+это выполнение одной или другой последовательности в зависимости от того,
+истинно (<span class="code">true</span>) ли проверяемое условие или ложно (<span class="code">false</span>).<br />
+<br /><img src="images/structograms-branch.png" /><br />
+<br />
+В программе на <span class="code">Ruby</span> выбор действий в зависимости от истинности условия может выглядеть так:
+  <pre class="code">
+    if (is_even?(line_number)) then
+	sum1 += number_from_file
+    else
+	sum2 += number_from_file
+    end
+  </pre>
+Во многих языках программирования есть конструкция множественного ветвления (<span class="code">multiple branching</span>) в зависимости от проверки не одного, 
+а нескольких условий (многовариантный выбор).<br />
+<br /><img src="images/structograms-switch.png" /><br />
+<br />
+Например, на языке <span class="code">Ruby</span> это записывается так:
+  <pre class="code">
+    case 
+    when temperature <= 18
+	print "Холодно!"
+    when temperature > 18 and temperature < 25
+	print "Тепло."
+    when temperature > 25
+	print "Жарко..."
+    else
+	print "Как же так?"
+    end
+  </pre>
+Конструкции выбора, следуя одна за другой, образуют <span class="italicized">последовательность</span> действий.<br />
+<br />
+ <span class="header">Цикл.</span> <br />
+<br />
+<span class="italicized">Цикл</span> (<span class="code">cycle</span>) — повторение (<span class="code">loop</span>) последовательности действий. 
+Самая распространённая разновидность цикла — это цикл с начальной проверкой условия (цикл <span class="code">while</span>, цикл с проверкой условия продолжения): 
+если условие истинно, то выполняются действия «в теле» цикла, а когда оно становится ложным, то цикл завершается, и выполняются действия после цикла.<br />
+<br /><img src="images/structograms-loop.png" /><br />
+<br />    
+В программе на <span class="code">Ruby</span> цикл «повтора с предусловием» записывается так:
+  <pre class="code">
+  line_number = 0                       # номер строки
+  while (not file.eof?) do              # пока не конец файла
+    number_from_file = file.read()      # прочитать число
+    line_number += 1                    # увеличить № строки
+    if (is_even?(line_number)) then     # № чётный?
+      sum1 += number_from_file          # добавить число к s1
+    else                                # иначе
+      sum2 += number_from_file          # добавить число к s2
+    end
+  end
+  </pre>
+Бывают и другие разновидности циклов, например «повтор с постусловием» (цикл <span class="code">until</span>, цикл с проверкой условия завершения), 
+который выполняется до тех пор, пока условие не станет истинным. Он выполняется хотя бы один раз.<br />
+<br />
+Ещё одна разновидность цикла — «повтор со счётчиком» (цикл <span class="code">for</span>), 
+который удобно использовать при переборе элементов массива по номеру элемента (индексу), 
+который изменяется от 0-го до последнего индекса в массиве.
+  <pre class="code">
+<span class="code bold">// JavaScript:</span>
+  for (var i = 0; i < array.length; i++) { // перебор 
+    console.log(array[i]);
+  }
+  </pre>
+Этот цикл можно переписать с применением цикла <span class="code">while</span> так:
+  <pre class="code">
+  var i = 0;                               # начальное значение индекса
+  while (i < array.length) {               # пока индекс < размера массива
+    console.log(array[i]);                 # вывести значение элемента № i
+    i++;                                   # увеличить значение индекса
+  }
+  </pre>
+<br />
+Циклы, выборы, последовательности — в программе эти конструкции объединяются в <span class="italicized">последовательности</span> или вкладываются одна в другую,
+чтобы оисать алгоритм обработки данных.
+<br />
+В <span class="code">NSD</span> есть обозначения и для других синтаксических конструкций, например: процессов (<span class="code">process blocks</span>) 
+и параллельного выполнения (<span class="code">parallel execution</span>) команд.
+<br />
+  <hr />
+  <span class="header">Ссылки:</span>
+  <ul>
+    <li>Вирт, Никлаус. "Алгоритмы структуры данных = программы" / Перевод: Л. Иоффе. - Москва: Мир, 1985. - 406 стр.
+Подробнее на livelib.ru:
+https://www.livelib.ru/book/1001450233-algoritmy-struktury-dannyh-programmy-niklaus-virt</li>
+    <li><a href="https://ru.wikipedia.org/wiki/Диаграмма_Насси_—_Шнейдермана">Диаграммы Насси-Шнейдермана.</a></li>
+  </ul>
+  <hr />
+ </div>
+ <a href="_00-content.html">Содержание</a>
+</body>
+</html>

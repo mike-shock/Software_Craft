@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>J01. JavaScript</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr>
+    <div class="text"> <span class="header">JavaScript.</span> <br>
+      <br>
+      <span class="code">JavaScript</span> (<span class="code">JS</span>) —
+      язык, созданный Бренданом Эйхом (из компании Netscape), который
+      поддерживает императивный, функциональный и объектно-ориентированный (на
+      основе прототипов) стили программирования. Это реализацией спецификации <span
+        class="code">ECMAScript</span> (стандарт ECMA-262). JavaScript наиболее
+      широко применяется в браузерах как язык сценариев для придания
+      интерактивности веб-страницам. <br>
+      <br>
+      <span class="subheader">JS в HTML-документе.</span></div>
+    <div class="text"><span class="subheader"></span> <br>
+    </div>
+    Для добавления кода на <span class="code">JavaScript</span> в HTML можно
+    использовать теги <span class="code">&lt;script&gt;</span> и <span class="code">&lt;/script&gt;</span>.
+    Контейнеров <span class="code">&lt;script&gt;</span> в одном документе
+    может быть сколько угодно. Атрибут <span class="code">type="text/javascript"</span>
+    указывать в теге <span class="code">&lt;script&gt;</span> необязательно,
+    это значение используется по умолчанию.
+    <div class="text"> <br>
+    </div>
+    <div class="text">
+      <p style="margin-bottom: 0cm" align="justify"> Пример скрипта, выводящий
+        модальное окно с текстовую строку: </p>
+      <pre class="code"><span class="code bold"># Язык программирования: JavaScript</span>
+&lt;script type="application/javascript"&gt;
+alert("Миру - мир!");
+&lt;/script&gt;
+</pre>
+      <p style="margin-bottom: 0cm" align="justify"> Программы на <span class="code">JavaScript</span>
+        рекомендуется выносить в отдельные файлы (с суффиксом <span class="code">.js</span>)
+        и подключать их с помощью тега <span class="code">&lt;script&gt;</span>:</p>
+      <p style="margin-bottom: 0cm"> <span class="code"> &lt;script
+          type="application/javascript"
+          src="http://путь/к/файлу/со/скриптом.js"&gt;</span> <span class="code">&lt;/script&gt;</span></p>
+      <p style="margin-bottom: 0cm" align="justify">Подключения внешних скриптов
+        принято помещать внутри контейнера <span class="code">&lt;head&gt;</span><span
+          class="code">&lt;/head&gt;</span>.</p>
+      <p style="margin-bottom: 0cm"><br>
+        <span class="code">JS</span> в атрибутах событий<span class="subheader">.</span></p>
+      <p style="margin-bottom: 0cm" align="justify"> У тегов HTML могут быть
+        атрибуты, в которых указываются действия (на языке JavaScript) для
+        обработки определённых событий, например:</p>
+      <p style="margin-bottom: 0cm"> </p>
+      <pre class="code">&lt;button onclick="alert('Миру - мир!');"&gt;Сказать&lt;/button&gt;
+</pre>
+      <p></p>
+      <p style="margin-bottom: 0cm" align="justify"><span class="subheader"></span>
+        <span class="subheader">Синтаксис.</span> </p>
+      <div class="text"><span class="subheader"></span> </div>
+      <p style="margin-bottom: 0cm"> <span class="underlined">Переменные</span>.</p>
+      <p style="margin-bottom: 0cm"> Переменные для хранения данных можно
+        объявлять несколькими способами:</p>
+      <pre class="code">// объявить переменную `email` с неопределённым начальным значением `undefined`
+var email;
+
+// объявить переменную и явно присвоить ей неопределённое значение
+var address = undefined;
+
+// объявить для блока переменную `counter` (со значением `undefined`)
+let counter;
+
+// объявить  для блока неизменяемую переменную `z` с начальным значением
+const slogan = "Это значение нельзя переопределить!";
+
+// объявить переменную `telephone` и присвоить ей числовое значение
+let telephone = 911;
+
+// заменить значение переменной `telephone` строковым значением
+// JavaScript is a dynamically-typed language, so this is legal.
+telephone = "911";</pre>
+      <p style="margin-bottom: 0cm" align="justify"> <span class="underlined">Вывод
+          данных</span></p>
+      <p style="margin-bottom: 0cm" align="justify"> Для проверки, отладки и
+        протоколирования можно выводить данные в консоль браузера:</p>
+      <pre class="code">console.log("Миру - мир!");
+</pre>
+      <p style="margin-bottom: 0cm"> Можно выводить данные в документ HTML
+        (внутри тега <span class="code">&lt;script&gt;</span>):</p>
+      <pre class="code">// добавить в DOM текстовый объект
+document.write("Миру - мир!");
+</pre>
+      <p style="margin-bottom: 0cm"> <span class="underlined">Управляющие
+          структуры</span>.</p>
+      <p style="margin-bottom: 0cm">
+      </p>
+      <pre class="code">// последовательность действий (вызовов функций):
+var text_element = document.getElementById("text1");
+element.style.color = new_color;
+
+// выбор:
+if (answer == "Yes") {
+  console.log("Пользователь одобрил условия.");
+} else {
+  console.log("Пользователь отклонил условия!");
+}
+
+// цикл с проверкой продолжения в начале цикла:
+let answer = "";
+while (answer != "Да" || answer != "Нет") {
+  answer = ask_user_a_question("&gt;Вам нравится JavaScript?");
+}
+
+// цикл с проверкой продолжения в конце цикла:
+do {
+  answer = ask_user_a_question("&gt;Вам нравится JavaScript?");
+} while (answer != "Да" || answer != "Нет&gt;");
+
+// цикл со счётчиком повторений (от 1 до n):
+let n = 10;
+for (let i = 0; i &lt; n; i++) {
+  console.log("В &gt;" + i + "-й раз повторяю: 'Развивайте критическое мышление!');
+}
+
+// бесконечные циклы
+for (;;) {
+  // будет выполняться вечно
+}
+
+while (true) {
+  // будет выполняться вечно
+}
+</pre>
+      <p style="margin-bottom: 0cm">
+        <span class="underlined">Подпрограммы<!--ызфт-->. </span></p>
+      <p style="margin-bottom: 0cm" align="justify"> В <span class="code">JavaScript</span>
+        все подпрограммы — это функции, которые могут возвращать результат
+        командой <span class="code">return</span>, если это нужно. </p>
+      <pre class="code">// описание функции
+function hello_user(user_name) {
+  alert("Привет, "+user_name+"!");
+}
+
+// вызов функции = обращение к функции
+hello_user("Брендан Эйх"); // --&gt; "Привет, Брендан Эйх!"
+</pre>
+      <div class="text">
+        <span class="italicized">Рекурсивная функция</span> вызывает сама себя:
+      </div>
+      <pre class="code">function factorial(n) {
+  if (n === 0) {
+    return 1; // 0! = 1
+  } else {
+    return n * factorial(n — 1);
+  }
+}
+factorial(3); // --&gt; 6
+</pre>
+      <p style="margin-bottom: 0cm" align="justify">
+        <span class="italicized">Анонимная функция</span> — это описание функция
+        без имени, но при этом создаётся программный объект «функция», который
+        можно присвоить в переменную и вызывать по имени этой переменной.
+      </p>
+      <pre class="code">//
+var hello_user = function(user_name) { alert("Привет, "+user_name+"!"); }
+
+// вызов анонимной функции выглядит как вызов обычной функции
+hello_user("Брендан Эйх"); // --&gt; "Привет, Брендан Эйх!"
+</pre>
+      <p style="margin-bottom: 0cm" align="justify">
+        Можно вызвать анонимную функцию (но только один раз), не присваивая её
+        переменной.
+      </p>
+      <pre class="code">// описание и немедленный вызов анонимной функции
+(function(user_name){ alert("Привет, "+user_name+"!"); })("Брендан Эйх");
+</pre>
+      <p style="margin-bottom: 0cm; font-weight: normal" align="justify">
+        Анонимную функцию удобно передавать в подпрограмму для выполнения
+        действий, например, по таймеру:
+      </p>
+      <pre class="code">// установить интервал в 1000 миллисекунд для автоматического вызова функции
+setTimeout(function(){ /* команды */ }, 1000);
+</pre>
+      <p style="margin-bottom: 0cm; font-weight: normal" align="justify"><font face="FreeSans, sans-serif">
+          или указывать в качестве обработчика события:</font></p>
+      <font face="FreeSans, sans-serif">
+        <pre class="code">window.onload = function() { alert('Страница успешно загружена.'); }
+</pre> </font>
+      <div class="text"><font face="FreeSans, sans-serif">
+          <p style="margin-bottom: 0cm">
+            <span class="header">Альтернативы.</span> </p>
+        </font>
+        <p style="margin-bottom: 0cm" align="justify"><font face="FreeSans, sans-serif">
+            <span class="subheader">TypeScript</span><br>
+            <br>
+            <span class="code">TypeScript</span> — язык программирования,
+            разработанный в 2012 году Андерсом Хейлсбергом (из Microsoft),
+            автором языков Turbo Pascal, Delphi и C#. <span class="code">TypeScript</span>
+            позиционируется как средство разработки веб-приложений, расширяющее
+            возможности <span class="code">JavaScript</span>. В <span class="code">TypeScript</span>,
+            в отличие от <span class="code">JavaScript</span></font>, есть
+          возможность явного статического назначения типов, поддержка
+          использования полноценных классов (как в традиционных
+          объектно-ориентированных языках), поддержка подключения модулей: всё
+          это призвано повысить скорость разработки, облегчить читаемость,
+          рефакторинг и повторное использование кода, помочь осуществлять поиск
+          ошибок на этапе разработки и компиляции, и, возможно, ускорить
+          выполнение программ.</p>
+        <p style="margin-bottom: 0cm">
+          <span class="subheader">Kotlin/JS</span><br>
+          <br>
+          <span class="code">Kotlin/JS</span> — это </p>
+        <p style="margin-bottom: 0cm"><font color="#000000">
+            <span class="subheader">Ruby2JS</span><br>
+            <br>
+            <span class="code">Ruby2JS</span> — это </font></p>
+        <font color="#000000">
+          <pre class="code"></pre>
+          <p style="margin-bottom: 0cm" align="justify"> </p>
+          <hr> <span class="header">Q&amp;A.</span> <br>
+          <span class="bold">Q:</span> ? <br>
+          <span class="bold">A:</span> ! <br>
+          <hr> <span class="header">Задания.</span> <br>
+          A01. <br>
+          ... <br>
+          <hr> <span class="header">Ссылки:</span>
+          <ul>
+            <li>
+              <a href="https://learn.javascript.ru/">https://learn.javascript.ru/</a></li>
+            <li>
+              <a href="https://www.javascriptinstitute.org/javascript-tutorial/">https://www.javascriptinstitute.org/javascript-tutorial/</a>
+            </li>
+            <li>
+              <a href="https://www.w3schools.com/js/">https://www.w3schools.com/js/</a>
+            </li>
+            <li>
+              <a href="https://kotlinlang.ru/docs/js-overview.html">https://kotlinlang.ru/docs/js-overview.html</a>
+            </li>
+            <li>
+              <a href="https://www.ruby2js.com/">https://www.ruby2js.com/</a> </li>
+          </ul>
+          <ul>
+          </ul>
+        </font></div>
+      <font color="#000000">
+        <hr> <a href="_00-content.html">Содержание</a> </font></div>
+  </body>
+</html>

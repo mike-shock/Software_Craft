@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>D01. Data Types</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr>
+    <div class="text"> <span class="header">Типы данных.</span> <br>
+      <br>
+      Обучение программированию начинается с примеров, в которых используются
+      разные <i>типы данных</i> (<span class="code">data type</span>) — целые
+      числа (<span class="code">integer</span>), числа с плавающей точкой (<span
+        class="code">float</span>, <span class="code">double</span>), текстовые
+      строки (<span class="code">string</span>), логические величины (<span class="code">boolean</span>,
+      <span class="code">Bool</span>). В большинстве языков программирования,
+      как компилируемых (<span class="code">Java</span>, <span class="code">Kotlin</span>,
+      <span class="code">C#</span>, <span class="code">C++</span>), так и
+      интерпретируемых, «скриптовых» (<span class="code">Perl</span>, <span class="code">Ruby</span>,
+      <span class="code">JavaScript</span>, <span class="code">Python</span>, <span
+        class="code">PHP</span>), такие данные обычно соответствуют машинным
+      словам, последовательностям байтов и битам в оперативной памяти.
+      <br>
+      В любом языке программирования есть простые или <em>скалярные</em> (<span
+        class="code">scalar</span>) типы данных (<span class="code">integer</span>,
+      <span class="code">float</span>, <span class="code">string</span>, <span
+        class="code">boolean</span>, ...). В скалярной переменной (<span class="code">variable</span>)
+      можно хранить только одно значение (<span class="code">value</span>)
+      определённого типа, а затем заменять его операцией присваивания (<span class="code">assignment</span>):
+      <pre class="code"># Ruby, Python:
+    email = "deinlandel@gmail.com"
+    age = 32
+# JavaScript:
+    var profession = "программист";
+    let alive = false;
+</pre>
+      При этом часто при присваивании значения справа от имени переменной после
+      знака присваивания (<span class="code">=</span>) записываются <i>литералы</i>
+      (<span class="code">literals</span>), то есть непосредственные значения,
+      константы (<span class="code">literals</span>):
+      <pre class="code">    " роман 'Война и мир' "     # строка в кавычках, string
+    ' роман "Война и мир" '     # строка в апострофах, string
+    -42                         # отрицательное целое число, integer
+    3.14                        # дробное число, float
+    1Е+6                        # дробное число =1*106, float
+    true                        # логическое значение, boolean
+  </pre>
+      Кроме присваивания для каждого типа данных в языке предусмотрен свой
+      особенный набор операций (<span class="code">operation</span>):
+      <ul>
+        <li> для числовых (<span class="code">numeric</span>) типов данных —
+          арифметические (сложение, деление, ...) и другие математические, </li>
+        <li> для булевых (<span class="code">boolean</span>) — логические (И,
+          ИЛИ, НЕ, ...), </li>
+        <li> для строк (<span class="code">string</span>) — строковые
+          (сцепление, выделение подстроки, нахождение её длины, ...). </li>
+      </ul>
+      Часто встречающиеся операции обозначаются традиционными (<span class="code">+</span>,
+      <span class="code">-</span>, <span class="code">/</span>, <span class="code">*</span>,
+      <span class="code">&gt;</span>, <span class="code">&lt;</span>, <span class="code">&gt;=</span>,
+      ...) или специальными (<span class="code">++</span>, <span class="code">==</span>,
+      <span class="code">%</span>, <span class="code">!=</span>, <span class="code">+=</span>,
+      <span class="code">|</span>, <span class="code">&amp;</span>, <span class="code">^</span>,
+      <span class="code">&lt;&lt;</span>, <span class="code">||</span>, ...)
+      символами, а также ключевыми словами языка (<span class="code">and</span>,
+      <span class="code">or</span>, <span class="code">not</span>, ...). Другие
+      операции существуют в языке в виде библиотечных функций (<span class="code">abs</span>,
+      <span class="code">sin</span>, <span class="code">substr</span>, <span class="code">length</span>,
+      <span class="code">slice</span>, ...).
+      Обычно в языке программирования есть особое скалярное значение для
+      обозначения неопределённого значения (undefined value) — указания на то,
+      что переменной не присвоено никакого значения:
+      <span class="code">nil</span> (<span class="code">Ruby</span>, <span class="code">Pascal</span>,
+      <span class="code">Clojure</span>), <span class="code">undef</span> (<span
+        class="code">Perl</span>), <span class="code">null</span> (<span class="code">Java</span>,
+      <span class="code">Kotlin</span>, <span class="code">JavaScript</span>, <span
+        class="code">PHP</span>), <span class="code">NULL</span> (<span class="code">C++</span>,
+      <span class="code">SQL</span>), <span class="code">None</span> (<span class="code">Python</span>),
+      <span class="code">Nothing</span> (<span class="code">Scala</span>).
+      Примеры операций над скалярными данными:
+      <pre class="code">    2 * PI * radius
+    temperature &gt; 0
+    "текстовые строки " + "можно сцеплять" + "в одну"
+    true or false
+  </pre>
+      Строки, содержащие текстовую информацию, в некоторых языках
+      рассматриваются не как скалярные данные, а как последовательности символов
+      или байтов: по сути, массивы (списки) символов.
+      Примеры операций над скалярными строками:
+      <pre class="code"># Ruby
+first = (string.nil? || string.length()==0) ? "" : string.slice(0,1)
+# Python
+first = '' if (string == None or len(string)==0) else string[0]
+</pre>
+      В современных языках программирования текстовые строки хранятся в
+      многобайтовой кодировке (чаще всего в UTF-8), где один символ может
+      представляться несколькими байтами.
+      При разработке большинства программ возникает необходимость использовать
+      более сложные <a href="D02-array.html">структуры данных</a>. <br>
+    </div>
+    <hr> <a href="_00-content.html">Содержание</a>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>D04. JSON</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+<body>
+ <a href="_00-content.html">Содержание</a>
+ <hr />
+ <div class="text">
+ <span class="header">JSON.</span> <br />
+ <br />
+Для обмена данными по сети (например, между web-сервером и web-браузером, обычно с применением <span class="code">AJAX</span>) 
+удобно использовать универсальный формат <span class="code">JSON</span> (<span class="code">JavaScript Object Notation</span>)
+для представления этих данных. 
+По сути — это строки символов, в которых описаны хэши и массивы по правилам языка <span class="code">JavaScript</span>. 
+Во всех популярных языках программирования есть библиотеки для работы с форматом <span class="code">JSON</span>.
+ <pre class="code">
+  var json = JSON.stringify(hash);         // JavaScript
+  var hash = JSON.parse(json);             // -- " –-
+  json = hash.to_json                      # Ruby
+  hash = JSON.parse(json)                  # -- " –-
+  json = json.dumps(dictionary)            # Python
+  dictionary = json.loads(json)            # -- " –-
+  $json = json_encode($hash);              # PHP
+  $hash = json_decode($json, false);       # -- " –-
+ </pre>
+Запись об информационном объекте можно представить в виде хэша, а затем эти записи объединить в массив:
+ <pre class="code">
+<span class="code bold">// JavaScript:</span>
+  ruby_creator = {"name": "Мацумото, Юкихиро", "birthday": "1965-04-14", "country": "Япония", "nickname": "Matz"};
+  perl_creator = {"name": "Уолл, Ларри", "birthday": "1954-09-27", "country": "США"};
+  language_creators = [perl_creator, ruby_creator];
+ </pre>
+Подобный список часто формируется из базы данных, когда информация о каждом информационном объекте выбирается из нескольких таблиц («люди», «страны»). 
+При обработке информации в программной системе удобно передавать данные именно в виде хэшей, когда обрабатываются данные об одном объекте, 
+и массивов, когда обрабатываются списки объектов.
+<br />
+<br />
+Серверная часть  приложения преобразует хэш или массив в строку в формате <span class="code">JSON</span> и отправляет браузеру.
+ <pre class="code">
+<span class="code bold"># Ruby:</span>
+  require 'json'
+  hash = {
+    id: 25, title: 'Программирование на языке Perl 5', author: 'Шохирев М. В.'
+  }
+  hash_as_json_string = hash.to_json
+
+<span class="code bold">// PHP:</span>
+  $hash_as_json_string = json_encode($hash);
+ </pre>
+На клиентской стороне в браузере программа на JavaScript преобразует строку в программный хэш для обработки 
+(например, для обновления значений объектов DOM на web-странице):
+ <pre class="code">
+<span class="code bold">// JavaScript:</span>
+  var hash = JSON.parse(hash_as_json_string);
+  var book = document.getElementById('book_id-'+hash['id']);
+  book.value = hash['title'];
+ </pre>
+
+Перед отправкой данных на сервер с помощью <span class="code">AJAX</span> функция на <span class="code">JavaScript</span> 
+преобразует программный хэш в строку в формате <span class="code">JSON</span>:
+ <pre class="code">
+  hash['title'] = book.value;
+  hash['author'] = author.value;
+  var hash_as_json_string = JSON.stringify(hash);
+ </pre>
+
+На серверной стороне строка в формате <span class="code">JSON</span>, полученная от браузера, преобразуется в хэш для дальнейшей обработки, например, 
+для сохранения в базе данных.
+ <pre class="code">
+<span class="code bold"># Ruby:</span>
+  require 'json'
+  hash = JSON.parse(hash_as_json_string)
+
+<span class="code bold"># PHP:</span>
+  $hash = json_decode(hash_as_json_string, true);
+ </pre>
+
+  <hr />
+  <span class="header">Q&amp;A.</span> <br />
+  <span class="bold">Q:</span> Что такое AJAX? <br />
+  <span class="bold">A:</span> AJAX (Asynchronous Javascript and XML) — средства в языке <span class="code">JavaScript</span> 
+для обмена данными между браузером и web-сервером. 
+API для этого предоставляет класс <span class="code">XMLHttpRequest</span>. <br />
+  <hr />
+  <span class="header">Задания.</span> <br />
+   DJ#01. <br />
+   Написать программу на <span class="code">JavaScript</span>, которая получает данные от пользователя через форму
+   (например, дату рождения) и отправляет их на web-сервер в виде JSON. <br />
+   На web-сервере программа принимает эти данные, преобразует их из строки JSON в хэш, обрабатывает их
+   (например, находит, какое животное было символом этого года по китайскому календарю) и отправляет браузеру в формате JSON.
+   Получив данные с сервера, программа на JS отображает их на странице HTML.
+  <br />
+  <hr />
+  <span class="header">Ссылки:</span>
+  <ul>
+    <li><a href="https://ru.wikipedia.org/wiki/JSON">JSON @ wikipedia</a></li>
+    <li><a href="https://www.json.org/">JSON.org</a></li>
+    <li><a href="https://www.w3schools.com/js/js_json_intro.asp">JSON @ W3schools</a></li>
+    <li><a href="https://ru.wikipedia.org/wiki/AJAX">AJAX</a></li>
+    <li><a href="https://ru.wikipedia.org/wiki/XMLHttpRequest">XMLHttpRequest</a></li>
+  </ul>
+  <hr />
+ </div>
+ <a href="_00-content.html">Содержание</a>
+</body>
+</html>

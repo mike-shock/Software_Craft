@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>O01. Classes</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body> <a href="_00-content.html">Содержание</a>
+    <hr><br>
+    <div class="text"> <span class="header">Классы.</span> <br>
+      <br>
+      ООП позволяет определять собственные типы данных в виде классов (<span class="code">class</span>).
+      Классы нужны, чтобы описать в программе понятия, существующие в реальном
+      мире, которые понадобятся нам в программной системе. В программе при
+      помощи классов мы будем создавать однотипные объекты, а из этих объектов
+      строить модель реального мира. Например, для обработки информации об
+      организации нам понадобятся информационные объекты, соответствующие
+      понятиям: «Организаия», «Подразделение», «Работник», «Профессия» и т. п. <br>
+      <br>
+      Класс (<span class="code">class</span>) — это описание типа
+      информационного объекта, состоящее из 2-х основных разделов: <br>
+      <ol class="none">
+        <li>1) описания <span class="italicized">свойств</span>, называемых
+          атрибутами (<span class="code">attribute</span>) или полями данных (<span
+            class="code">data field</span>), которые характеризуют эти
+          информационные объекты и</li>
+        <li>2) описания <span class="italicized">операций</span> с объектами
+          этого типа, называемых методами (<span class="code">method</span>).</li>
+      </ol>
+      Например, для информационных объектов типа «Подразделение» логично описать
+      класс <span class="code">Department</span>, в котором предусмотреть
+      атрибуты: «идентификатор» (<span class="code">id</span>), «код» (<span class="code">code</span>),
+      «наименование» (<span class="code">name</span>), «идентификатор
+      вышестоящего подразделения» (<span class="code">parent_id</span>). Можно
+      считать атрибуты набором переменных, скрытых внутри каждого объекта этого
+      класса. Эти переменные будут содержать конкретные значения для каждого
+      объекта. <br>
+      <img src="images/oop-class1.png" width="200"></div>
+    <div class="text">То есть у каждого объекта класса <span class="code">Department</span>
+      будут внутренние переменные с именами <span class="code">id,</span><span
+        class="code"><span class="code"> name, </span></span><span class="code"><span
+          class="code"><span class="code">code</span> </span></span>и&nbsp; <span
+        class="code">parent_id</span>, но у одного объекта значениями будут,
+      например, <span class="code">20, 5520, "Служба ИТ", 55</span><span class="code"></span>,
+      а у другого — <span class="code">28, 2800, "Транспортный цех", nil</span><span
+        class="code"></span>.<br>
+      <br>
+    </div>
+    <div class="text">В классе обычно описывается особый метод для <span class="italicized">инициализации
+        объекта</span>, который отрабатывает при создании каждого объекта. В нём
+      чаще всего выполняются присваивания начальных значений атрибутам объекта.
+      Также в нём могут выполняться также и другие необходимые действия
+      (присваивание значений по умолчанию, вычисления, создание вложенных
+      объектов и т. п.).</div>
+    <br>
+    <div class="text"> Когда класс описан, можно создавать (<span class="code">instantiate</span>)
+      объекты (<span class="code">object</span>) этого класса, обращаясь к
+      особому методу класса, называемого <span class="italicized">конструктором</span>
+      (<span class="code">constructor</span>), который во многих языках имеет
+      зарезервированное имя <span class="code">new</span> (а в других языках
+      совпадает с именем класса). При создании объекта конструктору в качестве
+      параметров часто передаются начальные значения для присваивания атрибутам
+      создаваемого объекта.</div>
+    <div class="text"><br>
+    </div>
+    <div class="text">Класс выступает как "фабрика объектов": когда нам нужно
+      создать объект конкретного классы, мы обращаемся к этому классу с
+      "заданием" создать объект, и он "изготавливает" очередной экземпляр с
+      уникальным "заводским номером" (внутренним идентификатором), но с
+      определённым в классе набором "характеристик" (атрибутов) и "кнопок
+      управления" поведением (методов).<br>
+      <br>
+      Примеры описания класса и создания объекта этого класса:
+      <pre class="code"><span class="code bold"># Ruby:</span>
+<span class="code bold">class Department</span>
+  <span class="code bold">attr_reader</span> <span class="code bold italicized">:id, :code, :name, :parent_id</span>         # описание атрибутов
+  # метод инициализации объекта, вызываемый при его создании
+  <span class="code bold italicized">def initialize</span>(id, code, name, parent_id)         # параметры для присваивания начальных значений
+    @id = id
+    @code = code
+    @name = name
+    @parent_id = parent_id
+  <span class="code bold">end</span>
+<span class="code bold">end</span>
+it_dept = <span class="code bold">Department.new</span>(20, 5520, "Служба ИТ", 55) # создать объект с id=20, code=5520, name="Служба ИТ", parent_id=55
+
+<span class="code bold">// JavaScript:</span>
+<span class="code bold">class Department {</span>
+  <span class="code bold italicized">constructor</span>(id, code, name, parent_id) {
+    this.id = id;
+    this.code = code;
+    this.name = name;
+    this.parent_id = parent_id;
+  <span class="code bold">}</span>
+<span class="code bold">}</span>
+var it_dept = <span class="code bold">new Department</span>(20, 5520, "Служба ИТ", 55); // создать объект
+
+<span class="code bold"># Python:</span>
+<span class="code bold">class Department:</span>
+    # метод инициализации объекта, вызываемый при его создании
+    <span class="code bold">def</span> <span class="code bold italicized">__init__</span>(<span
+class="code bold">self</span>, id, code, name, parent_id):
+	self.id = id
+	self.code = code
+	self.name = name
+	self.parent_id = parent_id
+it_dept = <span class="code bold">Department</span>(20, 5520, "Служба ИТ", 55) # создать объект
+
+<span class="code bold">// PHP:</span>
+<span class="code bold">class Department {</span>
+    private $id, $code, $name, $parent_id; # атрибуты
+    # метод инициализации объекта, вызываемый при его создании
+    <span class="code bold">function</span> <span class="code bold italicized">__construct</span>($id, $code, $name, $parent_id) {
+      $this-&gt;id = $id;
+      $this-&gt;code = $code;
+      $this-&gt;name = $name;
+      $this-&gt;parent_id = $parent_id;
+    <span class="code bold">}</span>
+<span class="code bold">}</span>
+$it_dept = <span class="code bold">new Department</span>(20, 5520, "Служба ИТ", 55); # создать объект
+
+<span class="code bold">// Kotlin:</span>
+<span class="code bold">class Department constructor</span>(val id: Int, val code: String, var name: String, var parent_id: Int) <span
+class="code bold">{</span>
+  // ...
+<span class="code bold">}</span>
+val it_dept = <span class="code bold">Department</span>(20, 5520, "Служба ИТ", 55)
+</pre> <span class="header">Объекты.</span> <br>
+      <br>
+      Таким же образом создаются и другие <span class="italicized">объекты</span>
+      класса, называемые экземплярами (<span class="code">instance</span>).
+      Каждый экземпляр (объект) имеет свой набор значений (<span class="code">value</span>)
+      атрибутов. Эти значения представляют состояние (<span class="code">state</span>)
+      объекта. Изменение состояния объекта возможно, если в классе описаны
+      соответствующие методы.<br>
+      Доступ к свойствам часто записывается в виде <span class="code">объект.свойство</span>.
+    </div>
+    <div class="text">Именно объекты выполняют полезные действия при выполнении
+      программы: один объект обращается к другому для выполнения какого-то
+      действия, вызывая метод этого объекта. (В терминах ООП: отправляя (send)
+      другому объекту <i>сообщение</i> (message), совпадающее с именем метода.)
+      В ответ на запрос от какого-то объекта, этот объект может изменить своё
+      состояние или запросить у другого объекта выполнить нужное действие.</div>
+    <div class="text"> <br>
+      <span class="header">Методы доступа к данным.</span> <br>
+      <br>
+      Метод (<span class="code">method</span>) — это подпрограмма, которая
+      описана в определении класса и реализует операцию с объектом этого класса.
+      Поскольку методы имеют доступ к атрибутам объекта, с их помощью
+      организуется контролируемый доступ к значениям атрибутов. Такой механизм
+      доступа называется <span class="italicized">инкапсуляцией</span> (<span class="code">incapsulation</span>).
+      <br> Для <span class="italicized">чтения</span> значения атрибута
+      описывается особый метод (<span class="code">getter</span> / <span class="code">reader</span>),
+      часто совпадающий с именем атрибута. Если требуется, можно описать
+      операцию для <span class="italicized">изменения</span> значения атрибута
+      (<span class="code">setter</span> / <span class="code">writer</span>).
+      Например, для класса <span class="code">Department</span> можно описать
+      метод для изменения подчинённости подразделения <span class="code">change_parent(parent_department</span>),
+      который будет изменять атрибут <span class="code">parent_id</span>. <br>
+      В отличие от глобально объявленных подпрограмм при вызове метода всегда
+      указывается имя переменной, хранящей ссылку на конкретный объект. Формат
+      записи зависит от языка, но чаще всего применяются такая запись: <span class="code">объект.метод()</span>
+      или <span class="code">объект-&gt;метод()</span>. При этом внутри метода
+      ссылка на текущий объект, для которого выполняется метод, доступна под
+      специальным именем: чаще всего <span class="code">self</span> или <span
+        class="code">this</span>. Поэтому понятие "мой метод" будет
+      записываться, например, как <span class="code">self.method()</span>. <br>
+      <br>
+      <img src="images/oop-class2.png" width="200"></div>
+    <div class="text"><br>
+    </div>
+    <div class="text"> Примеры методов доступа к атрибутам объекта:
+      <pre class="code"><span class="code bold"># Ruby:</span>
+<span class="code bold">class Department</span>
+  # метод инициализации объекта, вызываемый при его создании
+  def <span class="code italicized">initialize</span>(id, code, name, parent_id)
+    @id = id
+    @code = code
+    @name = name
+    @parent_id = parent_id
+  end
+  # вместо генерирования атрибутов с помощью описания:
+  # attr_reader <span class="code italicized">:id, :code, :name, :parent_id</span>         # атрибуты
+  # можно вручную описать методы для чтения значений атрибутов:
+  <span class="code bold">def</span> <span class="code bold italicized">id</span>;   return @id; <span
+class="code bold">end</span>                 # Эти getter-методы создаются
+  <span class="code bold">def</span> <span class="code bold italicized">code</span>; return @code; <span
+class="code bold">end</span>               # описанием attr_reader.
+  <span class="code bold">def</span> <span class="code bold italicized">name</span>; return @name; <span
+class="code bold">end</span>               # Описание attr_writer
+  <span class="code bold">def</span> <span class="code bold italicized">parent_id</span>; return @parent_id; <span
+class="code bold">end</span>     # создаёт setter-методы.
+  <span class="code bold">def</span> <span class="code bold italicized">change_parent</span>(parent_department)
+    @parent_id = parent_department.id
+  <span class="code bold">end</span>
+end
+it_dept = Department.new(20, 5520, "Служба ИТ", 5500)
+print it_dept<span class="code bold italicized">.id</span>, ' ', it_dept<span class="code bold italicized">.code</span>, ' ', it_dept<span
+class="code bold italicized">.name</span>, "\n"
+it_dept<span class="code bold italicized">.change_parent</span>(Department.new(12, 5005, "Техническая служба", 0))
+print(it_dept<span class="code bold italicized">.parent_id</span>) # --&gt; 12
+
+<span class="code bold">// JavaScript:</span>
+<span class="code bold">class Department {</span>
+  <span class="code italicized">constructor</span>(id, code, name, parent_id) {
+    this.id = id;
+    this.code = code;
+    this.name = name;
+    this.parent_id = parent_id;
+  }
+  <span class="code bold italicized">change_parent</span>(parent_department) {При этом внутри метода
+      ссылка на текущий объект, для которого выполняется метод, доступна под      специальным именем:
+    this.parent_id = parent_department.id;
+    return this.parent_id;
+  <span class="code bold">}</span>
+<span class="code bold">}</span>
+var it_dept = new Department(20, 5520, "Служба ИТ", 55);
+console.log(it_dept<span class="code bold italicized">.code</span>);
+it_dept<span class="code bold italicized">.change_parent</span>(new Department(12, 5005, "Техническая служба", 0));
+console.log(it_dept<span class="code bold italicized">.parent_id</span>); // --&gt; 12
+
+<span class="code bold"># Python:</span>
+class Department:
+     # метод инициализации объекта, вызываемый при его создании
+    def <span class="code bold italicized">__init__</span>(self, id, code, name, parent_id):
+	self.id = id
+	self.code = code
+	self.name = name
+	self.parent_id = parent_id
+    # описание методов для чтения значений атрибутов
+    <span class="code bold">def</span> <span class="code bold italicized">id</span>(self):           # метод для доступа к значению "id"
+	return self.id
+    <span class="code bold">def</span> <span class="code bold italicized">code</span>(self):
+	return self.code                                              # метод для доступа к значению "code"
+    <span class="code bold">def</span> <span class="code bold italicized">name</span>(self):
+	return self.name                                              # метод для доступа к значению "name"
+    <span class="code bold">def</span> <span class="code bold italicized">parent_id</span>(self):    # метод доступа к значению "parent_id"
+	return self.parent_id
+    <span class="code bold">def</span> <span class="code bold italicized">change_parent</span>(self, parent_department):
+	self.parent_id = parent_department.id
+it_dept = Department(20, 5520, "Служба ИТ", 55)
+print it_dept<span class="code bold italicized">.id</span>, it_dept<span class="code bold italicized">.code</span>, it_dept<span
+class="code bold italicized">.name</span>, "\n"
+it_dept<span class="code bold italicized">.change_parent</span>(Department(12, 5005, "Техническая служба", 0))
+print(it_dept<span class="code bold italicized">.parent_id</span>) # --&gt; 12
+
+<span class="code bold">// PHP:</span>
+<span class="code bold">class Department {</span>
+    private $id, $code, $name, $parent_id; # атрибуты
+    # метод инициализации объекта, вызываемый при его создании
+    function __construct($id, $code, $name, $parent_id) {
+      $this-&gt;id = $id;
+      $this-&gt;code = $code;
+      $this-&gt;name = $name;
+      $this-&gt;parent_id = $parent_id;
+    }
+    // описание методов для чтения значений атрибутов
+    public <span class="code bold">function</span> <span class="code bold italicized">id</span>() { // метод для доступа к значению "id"
+     return $this-&gt;id;
+    }
+    public <span class="code bold">function</span> <span class="code bold italicized">code</span>() { // метод для доступа к значению "code"
+     return $this-&gt;code;
+    }
+    public <span class="code bold">function</span> <span class="code bold italicized">name</span>() {  // метод для доступа к значению "name"
+     return $this-&gt;name;
+    }
+    public <span class="code bold">function</span> <span class="code bold italicized">parent_id</span>() { // метод доступа к "parent_id"
+     return $this-&gt;parent_id;
+    }
+    public <span class="code bold">function</span> <span class="code bold italicized">change_parent</span>(parent_department) { // setter
+     $this-&gt;parent_id = parent_department.id;
+    }
+<span class="code bold">}</span>
+$it_dept = new Department(20, 5520, "Служба ИТ", 55);
+print($it_dept<span class="code bold italicized">-&gt;id()</span> .' '. $it_dept<span
+class="code bold italicized">-&gt;code()</span> .' '. $it_dept<span class="code bold italicized">-&gt;name()</span>."\n".);
+$it_dept<span class="code bold italicized">-&gt;change_parent</span>(new Department(12, 5005, "Техническая служба", 0));
+print($it_dept<span class="code bold italicized">-&gt;parent_id()</span>); // --&gt; 12
+</pre>
+      <hr>
+      <div> <span class="header">Q&amp;A.</span> <br>
+        <span class="bold">Q: Чем класс отличается от типа данных</span> ? <br>
+        <span class="bold">A:</span> В объектно-ориентированном языке
+        программирования есть встроенные классы, много пользовательских классов
+        описано в библиотеках языка, которые подключаются по мере необходимости.
+        Программист может описывать свои классы, которые по сути являются
+        пользовательскими типами данных. <br>
+        В одних ОО-языках помимо классов есть типы данных, называемые
+        "простыми", "примитивными" или "встроенными" (целые и дробные числа,
+        строки, логические величины). В других языках (например в <span class="code bold">Ruby</span>),
+        все типы данных являются классами.</div>
+      <div><br>
+      </div>
+      <div><span class="bold">Q: А класс тоже является объектом</span>? <br>
+        <span class="bold">A:</span> Логически рассуждая, да, классы — это
+        экземпляры класса Class. У них есть свои методы (например, конструктор
+        для создания объектов) и могут быть свои атрибуты, в которых хранятся
+        значения. Именно так реализованы классы в языке <span class="code bold">Ruby</span>.</div>
+      <div><br>
+      </div>
+      <div><span class="bold">Q: Если операция со стэком </span><span class="bold"><span
+            class="code bold">stack.push(element)</span>— это метод, то и
+          операция </span><span class="bold"><span class="bold"><span class="bold"><span
+                class="code bold">+</span></span></span> в выражении </span><span
+          class="bold"><span class="bold"><span class="code bold">20 + 5</span></span>
+        </span><span class="bold"><span class="bold">— это тоже метод</span> </span><span
+          class="bold"><span class="bold">для чисел</span></span><span class="bold"><span
+            class="bold"><span class="code bold"></span></span></span>? <br>
+        <span class="bold">A:</span> Логично. Например, в языке <span class="code bold">Ruby</span>
+        инфиксную операцию <span class="bold"><span class="bold"><span class="code bold">+</span></span></span>
+        в выражении <span class="bold"><span class="bold"><span class="code bold">20
+              + 5</span></span></span> можно записать и объектным способом: <span
+          class="bold"><span class="bold"><span class="code bold">20.+(5)</span></span></span>.</div>
+      <hr> <span class="header">Вопросы для самопроверки.</span> <br>
+      <ul>
+        <li><span>Для чего нужны классы?</span></li>
+        <li><span>Как создаются объекты конкретного класса?</span></li>
+        <li><span>Как называется метод, который отвечает за создание нового
+            объекта?</span></li>
+        <li><span>Каким образом можно установить </span><span>начальные
+            значения для атрибутов при создании объекта?</span></li>
+        <li><span>Как называются методы для чтения значений атрибутов?</span></li>
+        <li><span>Как называются методы для изменения значений атрибутов?</span></li>
+        <li>С помощью какого специального имени объект выражает понятие "мой":
+          мой атрибут, мой метод?</li>
+        <li>Выражения "объект <span class="code bold">X</span> отправляет
+          сообщение <span class="code bold">move(home)</span> объекту <span class="code bold">Y</span>"
+          и "объект <span class="code bold">X</span> вызывает метод <span class="code bold">move(home)</span>
+          объекта <span class="code bold">Y</span>" означают одно и то же или
+          нет?</li>
+      </ul>
+      <hr> <span class="header">Задания.</span> <br>
+      <span class="code bold">OC01. Задание OC#01.</span> <br>
+      Написать класс <span class="code">Organization</span>, который описывает
+      тип «Организация» со следующими атрибутами: <br>
+      <pre class="code">    id (идентификатор): целое число
+    name (наименование): строка
+    long_name (полное наименование): строка
+</pre> и методом для заполнения атрибутов информацией об организации из базы
+      данных (БД), находя её в соответствующей таблице по атрибуту <span class="code">id</span>:
+      <pre class="code">     the_organization = Organization.load(id)
+</pre> а также методом для сохранения в базе данных информации об организации:
+      <pre class="code">    the_organization.save()
+</pre> который изменяет в таблице БД запись об организации, находя её по
+      атрибуту <span class="code">id</span>, или добавляет в таблицу БД запись
+      со сведениями об организации, если в БД отсутствует запись с таким
+      значением атрибута <span class="code">id</span>. При этом атрибуту <span
+        class="code">id</span> присваивается значение из созданной записи. <br>
+      Пример работы этих методов (<span class="code">PHP</span>):
+      <pre class="code">  $jet_brains = new Organization(0, "JetBrains", "JetBrains s.r.o."); // создан объект класса "Организация"
+  $jet_brains-&gt;save();					              // объект записан в хранилище, присвоено значение id
+  $organization = Organization::load($jet_brains-&gt;id());              // объект восстановлен из хранилища
+  print($organization-&gt;name();			                      // --&gt; "JetBrains"
+</pre>
+      <div class="text"><br>
+        <hr> <span class="header">Ссылки:</span>
+        <ul>
+          <li><span style="color: #0000ee;"><a href="https://kotlinlang.ru/docs/reference/classes.html">Классы
+                в Kotlin</a>.</span></li>
+          <li><a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes">Классы
+              в JavaScript</a>.</li>
+          <li><a href="https://www.w3schools.com/python/python_classes.asp">Классы
+              и объекты в Python</a>.</li>
+          <li><span style="color: #0000ee;"><a href="https://www.w3schools.com/php/php_oop_classes_objects.asp">Классы
+                и объекты в PHP</a>.</span></li>
+        </ul>
+      </div>
+      <hr> <a href="_00-content.html">Содержание</a> </div>
+  </body>
+</html>
