@@ -28,3 +28,15 @@ ol.none { list-style-type: none; }
 .text {
   text-align: justify;
 }
+
+.popup {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  zIndex: "1";
+  visibility: hidden;
+  border-style: double;
+  color: blue;
+  background: #fee;
+  width: 500px;
+}
