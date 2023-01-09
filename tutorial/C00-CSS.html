@@ -12,7 +12,7 @@
       <span class="subheader">Стили.</span> <br>
       <br>
       Каскадные стилевые таблицы (<span class="code">Cascading Style Sheets</span>)
-      дополняют HTML. В них указываются описания, как должно быть представлено
+      дополняют HTML. С помощью CSS мы описываем, как должно быть представлено
       содержимое документа HTML.</div>
     <div class="text">Чаще всего стилевые таблицы хранятся в отдельных файлах с
       суффиксом (расширением) <span class="code"></span><span class="code"><span
@@ -20,16 +20,36 @@
       оторым нужно применить стили.</div>
     <div class="text"><br>
     </div>
-    <div class="text">
-      Примеры:
+    <div class="text"> Примеры:
       <pre class="code"><span class="code bold"># CSS встроенная и внешняя:</span>
   &lt;html&gt;<br>    &lt;head&gt;<br>      &lt;!-- встроенная стилевая таблица -- &gt;<br>      <strong>&lt;style&gt;</strong><br><strong>        h1 {<br></strong><strong><strong>          font-weight: bold;<br></strong>          font-size: 8mm;<br>        }<br></strong>      <strong>&lt;/style&gt;</strong><br>      &lt;!-- ссылка на внешнюю стилевую таблицу -- &gt;<br>      <strong>&lt;link rel="stylesheet" type="text/css" href="document.css" /&gt;</strong><br>    &lt;/head&gt;<br>    &lt;body&gt;<br>      <strong>&lt;h1&gt;</strong> Этот заголовок будет выведен полужирным шрифтом буквами размером 8 мм <strong>&lt;/h1&gt;</strong><br>    &lt;/body&gt;<br>  &lt;/html&gt; </pre>
+      <div class="text"><span class="subheader">Из чего состоят описания стилей.</span>
+        <br>
+      </div>
+      <div class="text"><br>
+      </div>
+      <div class="text"> ??? </div>
       <hr> <span class="header">Q&amp;A.</span> <br>
       <span class="bold">Q:</span> Можно программировать на CSS? <br>
-      <span class="bold">A:</span> Нет, это язык описания стилей, а не язык
+      <span class="bold">A:</span> CSS — это язык описания стилей, а не язык
       программирования. Но на CSS можно описать <em>преобразования</em> (<span
-        class="code">transformation</span>), которые заставят браузер
-      динамически изменять .<br>
+        class="code">transformation</span>), а браузер по описанию
+      преобразований будет динамически изменять объекты на странице. Таким
+      образом можно описать несложную анимацию. Например:<br>
+      <pre class="code">  &lt;!-- В CSS описываем transformation с именем <span
+class="code bold">emergeFromEmptiness</span> --&gt;
+  &lt;style&gt;
+<pre class="code bold">    @keyframes emergeFromEmptiness {
+       0%   { opacity: 0; }
+       100% { opacity: 1; }
+    }
+    #santa {
+       animation-name: emergeFromEmptiness;
+       animation-duration: 5s;
+       animation-delay: 0s;
+    }
+</pre>  &lt;/style&gt;<br>  &lt;!-- В HTML назначаем id "<span class="code bold">santa</span>" для элемента, к которому будет применяться transformation --&gt;
+  &lt;img id="santa" src="images/FatherFrost.png" height="500" /&gt;   &nbsp;</pre>
       <hr> <span class="header">Задания.</span> <br>
       A01. <br>
       ... <br>

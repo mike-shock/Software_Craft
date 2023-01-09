@@ -28,8 +28,8 @@
     <div class="text">
       <pre><span class="subheader">История создания.</span></pre>
     </div>
-    <div class="text">Разработал язык Ruby японский программист Юкихиро Мацумото
-      (松本行弘), известный под ник-неймом Matz. Название языка навеяно языком Perl,
+    <div class="text">Разработал язык Ruby японский программист Юкихиро Мацумото,
+      известный под ник-неймом Matz. Название языка навеяно языком Perl,
       многие особенности синтаксиса и семантики из которого заимствованы в Ruby.<br>
       <br>
       Одним из источников вдохновения для Ю. Мацумото при разработке Ruby был
@@ -61,7 +61,9 @@
   def print_message(string, n) // описание подпрограммы начинается с 'def'
     puts string + "!"*n        // операция '*' повторяет строку n раз
   end                          // и заканчивается 'end'
-<br>  message = "Миру - мир"       // ';' в конце строки можно не ставить<br>  print_message message, 3     // вызов подпрограммы print_message(message, 3) можно писать без скобок<br>  // --&gt; Миру - мир!!!
+  message = "Миру - мир"       // ';' в конце строки можно не ставить
+  print_message message, 3     // вызов подпрограммы print_message(message, 3) можно писать без скобок
+                               // --&gt; Миру - мир!!!
 
   
 </pre> <span class="header">Установка.<br>
@@ -94,7 +96,7 @@
     <div class="text">В ответ вы должны увидеть версию установленного
       интерпретатора языка.<br>
       Если программа-интерпретатор не найдена, то для установки можно
-      использовать сторонние инструменты: rbenv и RVM.<br>
+      использовать сторонние инструменты: <span class="code">rbenv</span> и <span class="code">RVM</span>.<br>
       <span class="subheader"><br>
         Microsoft Windows.</span> <br>
     </div>
@@ -103,7 +105,7 @@
     <div class="text">На официальном сайте языка Ruby для MS Windows
       предлагается использовать установщик с сайта <a href="https://rubyinstaller.org/downloads/">rubyinstaller.org</a>
       Надо скачать оттуда установщик и запустить его. <br>
-      По умолчанию Ruby ставится в /Program Files, а я обычно устанавливаю в
+      По умолчанию Ruby ставится в <span class="code">/Program Files/</span>, а я обычно устанавливаю в
       каталог <span class="code">/opt/ruby/</span>.<br>
       <span class="header"><br>
         Ruby gems.</span><br>
@@ -112,8 +114,9 @@
     </div>
     <div class="text">Как и для других языков программирования, для Ruby
       разработана удобная система установки дополнительных библиотечных модулей,
-      которые называются gems.За управление такими модулями отвечает утилита
-      gem. </div>
+      которые называются gems.
+      За управление такими модулями отвечает утилита <span class="code">gem</span>. 
+    </div>
     <div class="text">Например, для запуска тестового web-сервера <span class="code">puma</span>
       + <span class="code">rack </span>потребуется установить такие
       "самоцветы":</div>
@@ -137,14 +140,22 @@ gem install rack<br>gem install puma</pre>
 </pre>
         <div class="text"></div>
         <div class="text"></div>
-        <div class="text"></div>
       </div>
-      <hr> <span class="header">???</span>
-      <pre>??? </pre>
+      <hr> <span class="header">Учебник</span>
+      <div class="text">
+      Весело написанный учебник по языку Ruby для начинающих изучать программирование написал Крис Пайн. 
+      Он размещён в открытом доступе <a href="https://pine.fm/LearnToProgram">на сайте</a> автора.
+      Там же есть ссылки на переводы учебника на разные языки, в том числе <a href="materials/LTP-ru.pdf">на русский</a>.
+      </div>
       <hr> <span class="header"></span>
       <hr> <span class="header">Q&amp;A.</span> <br>
-      <span class="bold">Q:</span> Кто разработал язык Ruby?<br>
-      <span class="bold">A:</span> Matsumoto Yukihiro.<br>
+      <span class="bold">Q:</span> Как же всё-таки зовут разработчика языка Ruby?<br>
+      <span class="bold">A:</span> Matsumoto Yukihiro (松本 行弘). Мацумото (まつもと) — фамилия, Юкихиро (ゆきひろ) — имя, а Matz — прозвище.<br><br>
+      <span class="bold">Q:</span> Что самое главное в языке Ruby?<br>
+      <span class="bold">A:</span> Гармония. Соразмеренное сочетание выразительных синтакисческих конструкций с мощью и логичностью языковых средств.<br><br>
+      <span class="bold">Q:</span> Почему язык Ruby хорошо подходит для обучения, особенно в качестве первого языка?<br>
+      <span class="bold">A:</span> Ruby — чисто объектный непротиворечивый язык, предсказуемо и удобно построенный, 
+      прост для освоения и очень хорошо годится для понимания объектно-ориентированного программирования.<br><br>
       <hr> <span class="header">Задания.</span> <br>
       A01. <br>
       ... <br>
@@ -152,6 +163,7 @@ gem install rack<br>gem install puma</pre>
     <hr> <span class="header">Ссылки:</span>
     <ul>
       <li><a href="https://www.ruby-lang.org/ru/">Официальный сайт языка.</a></li>
+      <li><a href="https://pine.fm/LearnToProgram">Chris Pine - "Learn To Program" (на английском).</a></li>
     </ul>
     <hr> <a href="_00-content.html">Содержание</a>
   </body>

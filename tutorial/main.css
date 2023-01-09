@@ -39,4 +39,8 @@ ol.none { list-style-type: none; }
   color: blue;
   background: #fee;
   width: 500px;
+  padding-top: 20px;
+  padding-right: 2px;
+  padding-bottom: 20px;
+  padding-left: 20px;
 }
