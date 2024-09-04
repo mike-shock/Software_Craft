@@ -26,35 +26,39 @@
       <span class="subheader">Виды web-приложений.</span><br>
       <br>
       Есть 2 основных подхода, которые применяются при разработке
-      web-приложений: (1) «клиент на <span class="code">JavaScript</span>» и
-      (2) «динамический web-сайт». Вот сравнение этих 2-х подходов.
-      <table width="85%" cellspacing="0" cellpadding="0" border="1">
+      web-приложений, назовём их так: (1) «клиент на <span class="code">JavaScript</span>» и
+      (2) «динамический web-сайт». <br /> 
+      Вот сравнение этих 2-х подходов.
+      <table width="85%" cellspacing="0" cellpadding="3" border="1">
         <tbody>
           <tr align="center">
-            <th width="20%">Где</th>
-            <th width="25%">Что</th>
+            <th width="20%" rowspan="2">Где</th>
+            <th width="25%" rowspan="2">Что</th>
             <th width="30%">Подход # 1</th>
             <th width="25%">Подход # 2</th>
+          </tr>
+          <tr align="center">
+            <td width="30%">«клиент на JavaScript»</td>
+            <td width="25%">«динамический web-сайт»</td>
           </tr>
           <tr>
             <th>Клиент / Сервер</th>
             <th align="right">Результат работы</th>
-            <th>HTML-страница, динамически изменяемая клиентом на <span class="code">JavaScript</span></th>
-            <th>Страницы <span class="code">HTML</span>, динамически
-              формируемые на сервере</th>
+            <th><span class="code">HTML</span>-страница, динамически изменяемая клиентом на <span class="code">JavaScript</span></th>
+            <th>Готовые страницы <span class="code">HTML</span>, динамически формируемые на сервере</th>
           </tr>
           <tr>
             <td rowspan="4">&nbsp;На клиентской стороне (в web-браузере)</td>
             <td>Средства для отображения данных</td>
             <td>(<span class="code">HTML</span> + <span class="code">CSS</span>)
-              = <span class="code">DOM</span> ← <span class="code">JavaScript</span></td>
+              = <span class="code">DOM</span> <span style="font-size: larger;">←</span> <span class="code">JavaScript</span></td>
             <td><span class="code">HTML</span> + <span class="code">CSS</span></td>
           </tr>
           <tr>
             <td>Средства для запроса данных с сервера</td>
             <td><span class="code">JavaScript</span> (<span class="code">AJAX</span>)
-              → запросы <span class="code">HTTP</span></td>
-            <td>Средства <span class="code">HTML</span>: ссылки, формы →
+              <span style="font-size: larger;">→</span> запросы <span class="code">HTTP</span></td>
+            <td>Средства <span class="code">HTML</span>: ссылки, формы <span style="font-size: larger;">→</span>
               запросы <span class="code">HTTP</span></td>
           </tr>
           <tr>
@@ -66,11 +70,11 @@
           </tr>
           <tr>
             <td>Используемые методы <span class="code">HTTP</span></td>
-            <td>CRUD-операции по <span class="code">REST</span>: <span class="code">POST</span>,
-              <span class="code">GET</span>, <span class="code">PATCH</span>, <span
-                class="code">DELETE</span></td>
-            <td>Поддерживаемые браузерами в <span class="code">&lt;a href&gt; и
-                &lt;form&gt;</span>: <span class="code">GET</span>, <span class="code">POST</span></td>
+            <td>Операции CRUD* по <span class="code">REST</span>: 
+              <span class="code">POST</span> / <span class="code">PUT</span>,
+              <span class="code">GET</span>, <span class="code">PATCH</span>, <span class="code">DELETE</span></td>
+            <td>Поддерживаемые браузерами в <span class="code">&lt;a href&gt;</span> и
+                <span class="code">&lt;form&gt;</span>: <span class="code">GET</span>, <span class="code">POST</span></td>
           </tr>
           <tr>
             <td rowspan="4">&nbsp;На серверной стороне (в сервере приложений)</td>
@@ -81,10 +85,9 @@
             <td>Разбор текста: <span class="code">имя=значение</span></td>
           </tr>
           <tr>
-            <td>Обработка полученных данных</td>
+            <td>Обработка полученных данных (на сервере)</td>
             <td>программы (формирования данных для ответа)</td>
-            <td class="code">программы + обработчик шаблонов (для генерирования
-              HTML-документа)</td>
+            <td>программы (формирования данных для ответа) + обработчик шаблонов (для генерирования <span class="code">HTML</span>-документа)</td>
           </tr>
           <tr>
             <td>Способ формирования ответа для клиента</td>
@@ -103,19 +106,21 @@
             <td rowspan="2">&nbsp;На клиентской стороне (в web-браузере) — после
               получения ответа с сервера</td>
             <td>Действия браузера</td>
-            <td>Страница не заменяется (остаётся прежней)</td>
+            <td>Страница не заменяется (не загружается новая страница взамен предыдущей),
+                но её содержиное программно изменяется.</td>
             <td>Загружается новая страница (сформированная на сервере на основе
-              шаблона), заменяя предыдущую</td>
+              шаблона), заменяя предыдущую.</td>
           </tr>
           <tr>
-            <td>Действия программы на JavaScript</td>
-            <td>получает с сервера данные (<span class="code">JSON</span>) и
+            <td>Действия программы на <span class="code">JavaScript</span></td>
+            <td>Получает с сервера данные (<span class="code">JSON</span>) и
               динамически изменяет представление данных на странице (и элементы
-              интерфейса), обращаясь к объектам <span class="code">DOM</span></td>
+              интерфейса), обращаясь к объектам <span class="code">DOM</span>.</td>
+            <td style="font-style: italic;">Обработка на <span class="code">JavaScript</span> не требуется,
+              т.&nbsp;к. страница подготовлена на сервере в окончательном виде.</td>
           </tr>
           <tr valign="top">
-            <td><br>
-            </td>
+            <td><br /></td>
             <th>Особенности</th>
             <td> Браузер выступает в качестве настоящего клиентского приложения,
               в котором выполняется код на JavaScript. <br>
@@ -162,20 +167,23 @@
           </tr>
         </tbody>
       </table>
-      <br>
+      <br />
+      * CRUD = Create, Read, Update, Delete ~ основные операции для манипулирования данными: создать (добавить), 
+        прочитать (выбрать), изменить (заменить), удалить (уничтожить).
+      <br /><br />
       <span class="subheader">Подход 1.</span> <br>
       <img src="images/1.png" width="1200"> <br>
       <span class="subheader">Подход 2.</span> <br>
       <img src="images/2.png" width="1200"> <br>
-      Элементы обеих подходов могут сочетаться. Будет подробно рассмотрен 1-й
-      подход.<br>
+      Элементы обеих подходов могут сочетаться. <b>Будет подробно рассмотрен 1-й подход</b>.<br>
       <br>
       <span class="subheader">Клиентская часть.</span> <br>
       <br>
       Обработка данных на стороне клиента выполняется в web-браузере с помощью
       набора программ на языке <span class="code">JavaScript</span>: они
       динамически изменяют представление данных в браузере, манипулируя с
-      объектами <span class="code">DOM</span> (Document Object Model).
+      объектами <span class="code">DOM</span> (Document Object Model) и 
+      <span class="code">BOM</span> (Browser Object Model).
       Программный обмен данными с web-сервером выполняется с использованием
       технологии <span class="code">AJAX</span>. При этом данные удобнее всего
       представлять в формате <span class="code">JSON</span>. Обращение к
@@ -252,7 +260,7 @@
       <span class="underlined">Маршрутизация данных (<span class="code">data
           routing</span>).</span> <br>
       <br>
-      Программная компонента, выполняющая функцию диспетчера (<span class="code">dispatcher</span>),
+      Программный компонент, выполняющий функцию диспетчера (<span class="code">dispatcher</span>),
       получает от web-сервера <span class="code">HTTP</span>-запрос, в котором
       (в соответствии с правилами <a href="H50-REST.html">REST</a>) выделяет
       следующие данные:<br>
@@ -273,7 +281,7 @@
           <tr>
             <td>&nbsp;URI</td>
             <td><span class="bold">&nbsp;Идентификатор ресурса</span>, которому
-              можно сопоставить программную компоненту (объект определённого
+              можно сопоставить программный компонент (объект определённого
               класса), которая содержит требуемый метод обработки данных.</td>
             <td><span class="code">/books</span></td>
           </tr>
@@ -304,10 +312,10 @@
         </tbody>
       </table>
       <br>
-      Для обработки данных нужно, чтобы компонента-диспетчер умела направлять
+      Для обработки данных нужно, чтобы компонент-диспетчер умел направлять
       данные на соответствующие компоненты. Для этого необходимо, чтобы во
       входных данных находились достаточные указания (имена ресурсов, классов и
-      пользовательские операции), чтобы выбрать подходящую компоненту.<br>
+      пользовательские операции), чтобы выбрать подходящий компонент.<br>
       <br>
       <span class="underlined">Обработка данных (<span class="code">data
           processing</span>).</span> <br>
@@ -320,7 +328,7 @@
       уровней: бизнес-объектам и адаптерам ввода-вывода.</div>
     <div class="text"><br>
     </div>
-    <div class="text">Программная компонента получает от «диспетчера» данные для
+    <div class="text">Программный компонент получает от «диспетчера» данные для
       обработки в виде модели в независимом от языка представлении, например, в
       виде ассоциативного массива (хэша) или массива хэшей.В таком же виде
       перемещаются данные между компонентами и отправляются клиенту.</div>
@@ -346,10 +354,10 @@
       <span class="subheader">Хранилище данных.</span><br>
       <br>
       Ввод-вывод данных для долговременного хранения организуется с помощью
-      интерфейсных компонент-<em>адаптеров</em> (<span class="code">adapter</span>),
-      которые унифицируют доступ к хранилищу данных. При этом подходе можно
-      безболезненно перейти на использование другого хранилища, не затрагивая
-      компоненты уровня логики приложения. <br>
+      интерфейсных компонентов-<em>адаптеров</em> (<span class="code">adapter</span>),
+      которые унифицируют доступ к хранилищу данных. <br />
+      При этом подходе можно безболезненно перейти на использование другого хранилища, 
+      не затрагивая компоненты уровня логики приложения. <br>
     </div>
     <div class="text"><br>
     </div>
@@ -361,9 +369,9 @@
       использовать локальную встраиваемую СУБД (<span class="code">SQLite</span>,
       <span class="code">BDE</span>, <span class="code">FirebirdSQL</span>, <span
         class="code">dBASE</span>). <br>
-      В качестве хранилища также может применяться база данных no-SQL или,
-      «плоские» файлы со структурированными данными (<span class="code">JSON</span>,
-      <span class="code">CSV</span>, <span class="code">YAML</span>). </div>
+      В качестве хранилища также может применяться нереляционные базы данных (no-SQL DB, OO-DB), 
+      векторные базы данных, «плоские» файлы со структурированными данными (<span class="code">JSON</span>,
+      <span class="code">CSV</span>, <span class="code">YAML</span>), а также сетевые сервисы.. </div>
     <div class="text"><br>
     </div>
     <div class="text"><span class="subheader">API.</span><br>
