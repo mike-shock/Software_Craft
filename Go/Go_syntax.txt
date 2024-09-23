@@ -1,0 +1,30 @@
+
+_ // the variable to throw away value 
+<- // operation of sending to a channel (ch<-) or reading from (<-ch) a channel 
+:= // type inference: short assignment and declaration of a variable 
+%T // for printing the type 
+%v // for printing the value 
+*p // referring by pointer to a value 
+*T // a pointer to the type T 
+&v // getting a pointer to a value 
+v := <- ch // receive a value from the channel
+v, closed := <- ch // receive a value from the channel and check if it's closed 
+ch <- v // send a value to the channel 
+chan // channel declaration 
+chan<- // input channel type 
+const C // constant declaration 
+const Big = 1 << 100 // binary 1 with 100 zeros 
+defer // command execution 
+import ( "..." ) // factored import statement 
+fallthrough // to the next case in switch 
+func main() { ... } // programme starting function 
+go "goroutime name" // start concurrent routine 
+goto label // 
+package main // package declaration 
+struct S // structure declaration 
+struct ... // struct literal 
+T(v) // expression for converting a value to the type 
+
+ioutil.Discard // writing to this output stream discards the data
+os.Stdout // standard output stream
+

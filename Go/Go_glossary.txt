@@ -1,0 +1,29 @@
+
+Capitalized exported names ~ of variables and functions
+CSP = communicating sequential processes
+channel ~ communication mechanism that allows one goroutine to pass values of a specified type to another goroutine
+composite literal ~ a compact notation for instantiating any of Go’s composite types from a sequence of element values: []color.Color{...} or gif.GIF{...}
+contributed packages ~ godoc.org/
+factored import statement ~ ( "..." )
+gc ~ Google compiler toolchain
+gccgo ~ 
+Go ~
+Golang = Go
+gollvm ~ 
+GopherJS ~ 
+gopl ~ "The Go Programming Language" book by A.A.A.Donovan & B.W.Kernighan (gopl.io)
+goroutine ~ concurrently executable function
+Robert Griesemer ~
+Rob Pike ~
+Ken Thompson ~
+naked return ~
+omitted inferred types ~ of variables with initializers
+package main ~
+standard packages ~ golang.org/pkg
+statement ~ every statement begins with a keyword
+struct ~ a group of values called fields, often of different types, that are collected together in a single object that can be treated as a unit
+struct literal ~
+tagless switch ~
+TinyGo.org ~
+zero value ~ of an uninitialized variable is implicit initial value: 0 for numbers, false for booleans, "" for strings
+
