@@ -1,0 +1,6 @@
+
+go build program.go   # compile the program 
+go doc "package.name" # print info about package 
+go fmt program.go     # (reformat) package sources 
+go run program.go     # run the program 
+

@@ -1,3 +1,0 @@
-
-go goc "package.name" ~
-
