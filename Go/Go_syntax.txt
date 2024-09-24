@@ -10,20 +10,40 @@ _ // the variable to throw away value
 v := <- ch // receive a value from the channel
 v, closed := <- ch // receive a value from the channel and check if it's closed 
 ch <- v // send a value to the channel 
+
+const Big float64 = 1 << 100 // binary 1 with 100 zeros 
+T(v) // expression for converting a value to the type 
+
+break // if, for or switch
+case // of a switch 
 chan // channel declaration 
 chan<- // input channel type 
 const C // constant declaration 
-const Big = 1 << 100 // binary 1 with 100 zeros 
+continue // to the next loop iteration
+default //
 defer // command execution 
+else // otherwise for if
+for // cycle
+if // branch 
+import "..." // import a package
 import ( "..." ) // factored import statement 
+interface //
 fallthrough // to the next case in switch 
+func name { ... } // function declaration
 func main() { ... } // programme starting function 
 go "goroutime name" // start concurrent routine 
 goto label // 
+map //
 package main // package declaration 
+range //
+return //
+select //
 struct S // structure declaration 
-struct ... // struct literal 
-T(v) // expression for converting a value to the type 
+struct { ... } // struct literal 
+switch // 
+type // type declaration
+var //  variables declaration
+
 
 ioutil.Discard // writing to this output stream discards the data
 os.Stdout // standard output stream
